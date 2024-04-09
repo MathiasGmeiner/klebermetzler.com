@@ -1,6 +1,6 @@
 class KirbyApiError extends Error {
-  public url;
-  public status;
+  public url: string;
+  public status: number;
 
   constructor(message: string, status: number, url: string) {
     super(message);

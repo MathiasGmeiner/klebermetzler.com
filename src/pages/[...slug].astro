@@ -4,10 +4,15 @@ import { getIndex, getPage } from "@/lib/kirbycms";
 import Wrapper from "@components/Wrapper.astro";
 import Layout from "@layouts/Layout.astro";
 
+interface Page {
+  intendedTemplate: string;
+  uri: string;
+}
+
 export async function getStaticPaths() {
   const index = await getIndex();
 
-  return index.map((page) => {
+  return index.map((page: Page) => {
     return {
       params: {
         slug: page.intendedTemplate === "home" ? undefined : page.uri,

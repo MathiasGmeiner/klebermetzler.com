@@ -78,6 +78,13 @@ const metaTags = meta.filter((item) => item.tag !== "title");
     font-display: swap;
   }
 
+  *,
+  :after,
+  :before {
+    box-sizing: border-box;
+    border: 0 solid;
+  }
+
   :root {
     --background: 255, 255, 255;
     --color-black: 0, 0, 0;

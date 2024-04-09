@@ -1,0 +1,25 @@
+---
+import type { Props } from "@/types";
+
+const { page, global } = Astro.props;
+---
+
+<astro-debugger
+  data-page={JSON.stringify(page)}
+  data-global={JSON.stringify(global)}></astro-debugger>
+
+<script>
+  class AstroDebugger extends HTMLElement {
+    /**
+     * connectedCallback() method is a lifecycle method that is called when the custom element is inserted into the DOM, so the console.log() statements will execute when the astro-debugger element is inserted into the DOM.
+     */
+    connectedCallback() {
+      const page = JSON.parse(this.dataset.page);
+      const global = JSON.parse(this.dataset.global);
+      console.log("page", page);
+      console.log("global", global);
+    }
+  }
+
+  customElements.define("astro-debugger", AstroDebugger);
+</script>

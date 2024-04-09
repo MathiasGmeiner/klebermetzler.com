@@ -1,0 +1,18 @@
+---
+export const prerender = false;
+
+import Layout from "@layouts/Layout.astro";
+import { getGlobal, getPage } from "@lib/kirbycms";
+
+// get search params from Astro.request
+const params = new URLSearchParams(Astro.url.search);
+const slug = params.get("slug");
+const query = Astro.url?.search ?? "";
+
+const page = await getPage(slug, query);
+const global = await getGlobal();
+
+if (!page) return Astro.redirect("/z-error");
+---
+
+asjkläf

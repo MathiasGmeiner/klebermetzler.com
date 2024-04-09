@@ -1,0 +1,22 @@
+---
+import type { Global } from "@/types";
+import Wrapper from "./Wrapper.astro";
+
+const global: Global = Astro.props.global;
+---
+
+<footer class="fd-bu">
+  <Wrapper>
+    <div class="contact">
+      <h5 class="fd-bu">{global.footerContactLabel}</h5>
+      <a href={global.footerContactLink.href}
+        >{global.footerContactLink.title}</a
+      >
+    </div>
+  </Wrapper>
+</footer>
+
+<style>
+  .contact {
+  }
+</style>

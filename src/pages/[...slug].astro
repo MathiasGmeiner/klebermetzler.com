@@ -1,0 +1,28 @@
+---
+import { getGlobal } from "@/lib/kirbycms";
+import { getIndex, getPage } from "@/lib/kirbycms";
+import Wrapper from "@components/Wrapper.astro";
+import Layout from "@layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const index = await getIndex();
+
+  return index.map((page) => {
+    return {
+      params: {
+        slug: page.intendedTemplate === "home" ? undefined : page.uri,
+      },
+    };
+  });
+}
+
+const slug = (Astro.params as { slug?: string })?.slug ?? "home";
+const page = await getPage(slug);
+const global = await getGlobal();
+---
+
+<Layout page={page} global={global}>
+  <Wrapper>
+    <div>Test:</div>
+  </Wrapper>
+</Layout>

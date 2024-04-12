@@ -9,6 +9,12 @@ type Link = {
 
 export interface Global {
   title: string;
+  menuWork: Link | null;
+  menuInfo: Link | null;
+  menuBlog: Link | null;
+  menuJobs: Link | null;
+  menuSecondary: Link[] | null;
+  backgroundcolorMenu: string | null;
   footerContactLabel: string;
   footerContactLink: Link;
 }
@@ -25,7 +31,10 @@ export interface Page {
     } | null;
     content: string | null;
   }[];
-  content: any[];
+  content: {
+    backgroundcolor: string;
+    [key: string]: any;
+  };
 }
 
 export interface Props {

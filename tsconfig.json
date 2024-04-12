@@ -10,6 +10,7 @@
       "@lib/*": ["src/lib/*"],
       "@templates/*": ["src/templates/*"],
       "@scripts/*": ["src/scripts/*"],
+      "@images/*": ["src/images/*"],
       "@/*": ["./src/*"]
     }
   }

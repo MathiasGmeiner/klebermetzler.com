@@ -1,0 +1,132 @@
+---
+import type { Global } from "@/types";
+import { Image } from "astro:assets";
+import menu from "@/images/menu.svg";
+import menuClose from "@/images/menuClose.svg";
+import menuWork from "@/images/menuWork.svg";
+import menuInfo from "@/images/menuInfo.svg";
+import menuBlog from "@/images/menuBlog.svg";
+import menuJobs from "@/images/menuJobs.svg";
+import menuTagMobile from "@/images/menuTagMobile.svg";
+
+const global: Global = Astro.props.global;
+const backgroundcolorMenu = global.backgroundcolorMenu;
+---
+
+<header
+  class="fixed top-0 right-0 left-0 bottom-0 p-5 pointer-events-none"
+  data-header
+>
+  <div
+    class="absolute top-0 bottom-0 left-0 right-0 px-8 py-14 z-0 hidden"
+    data-tag
+  >
+    <Image
+      src={menuTagMobile}
+      alt="klebermetzler"
+      class="w-full h-full object-fill"
+    />
+  </div>
+  <div class="flex flex-col justify-between h-full relative">
+    <div class="grid grid-cols-2 gap-x-5">
+      <nav class="hidden" data-nav>
+        <ul class="flex flex-col gap-y-5 pointer-events-auto">
+          {
+            global.menuWork && (
+              <li>
+                <a
+                  href={global.menuWork.href}
+                  aria-label={global.menuWork.title}
+                >
+                  <Image src={menuWork} alt={global.menuWork.title} />
+                </a>
+              </li>
+            )
+          }
+          {
+            global.menuInfo && (
+              <li>
+                <a
+                  href={global.menuInfo.href}
+                  aria-label={global.menuInfo.title}
+                >
+                  <Image src={menuInfo} alt={global.menuInfo.title} />
+                </a>
+              </li>
+            )
+          }
+          {
+            global.menuBlog && (
+              <li>
+                <a
+                  href={global.menuBlog.href}
+                  aria-label={global.menuBlog.title}
+                >
+                  <Image src={menuBlog} alt={global.menuBlog.title} />
+                </a>
+              </li>
+            )
+          }
+          {
+            global.menuJobs && (
+              <li>
+                <a
+                  href={global.menuJobs.href}
+                  aria-label={global.menuJobs.title}
+                >
+                  <Image src={menuJobs} alt={global.menuJobs.title} />
+                </a>
+              </li>
+            )
+          }
+        </ul>
+      </nav>
+      <div class="flex flex-col gap-y-5 col-start-2 pointer-events-auto">
+        <button aria-label="Menu" data-trigger-menu-open
+          ><Image src={menu} alt="Menu" /></button
+        >
+        <button aria-label="Menu close" class="hidden" data-trigger-menu-close
+          ><Image src={menuClose} alt="Menu close" /></button
+        >
+      </div>
+    </div>
+    <div class="hidden" data-menu-secondary>
+      <div class="flex flex-col text-mobile-copy">
+        {
+          global.menuSecondary &&
+            global.menuSecondary.map((item) => (
+              <a href={item.href}>{item.title}</a>
+            ))
+        }
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const triggerMenuOpen = document.querySelector("[data-trigger-menu-open]");
+    triggerMenuOpen.addEventListener("click", () => {
+      document.querySelector("[data-header]").classList.add("menu-open");
+    });
+    const triggerMenuClose = document.querySelector(
+      "[data-trigger-menu-close]"
+    );
+    triggerMenuClose.addEventListener("click", () => {
+      document.querySelector("[data-header]").classList.remove("menu-open");
+    });
+  });
+</script>
+
+<style define:vars={{ backgroundcolorMenu }}>
+  [data-header].menu-open {
+    background-color: var(--backgroundcolorMenu);
+
+    [data-nav],
+    [data-trigger-menu-close],
+    [data-menu-secondary],
+    [data-tag] {
+      display: block;
+    }
+  }
+</style>

@@ -1,0 +1,29 @@
+---
+import type { Props } from "@/types";
+
+import TemplateDefault from "@templates/TemplateDefault.astro";
+import TemplateFallback from "@templates/TemplateFallback.astro";
+import TemplateProjectOverview from "@templates/TemplateProjectOverview.astro";
+
+const { page, global } = Astro.props;
+
+const templates = {
+  home: TemplateDefault,
+  default: TemplateDefault,
+  "project-overview": TemplateProjectOverview,
+  error: TemplateDefault,
+};
+
+const Template = templates[page.intendedTemplate] || TemplateFallback;
+
+const backgroundcolor = page.content.backgroundcolor;
+---
+
+<body>
+  <Template page={page} global={global} />
+</body>
+<style is:global define:vars={{ backgroundcolor }}>
+  body {
+    background-color: var(--backgroundcolor);
+  }
+</style>

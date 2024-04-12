@@ -2,7 +2,10 @@
 import type { Props } from "@/types";
 import AstroDebugger from "@/components/AstroDebugger.astro";
 import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import { ViewTransitions, fade } from "astro:transitions";
 
+const { page } = Astro.props;
 const { meta } = Astro.props.page;
 const metaTitle = meta.find((item) => item.tag === "title")?.content;
 const metaTags = meta.filter((item) => item.tag !== "title");
@@ -13,6 +16,27 @@ const metaTags = meta.filter((item) => item.tag !== "title");
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <link
+      rel="preload"
+      href="/fonts/national-2-narrow-medium.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin=""
+    />
+    <link
+      rel="preload"
+      href="/fonts/national-2-compressed-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin=""
+    />
+    <link
+      rel="preload"
+      href="/fonts/national-2-compressed-extrabold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin=""
+    />
     {
       metaTags.map((item) => {
         if (item.attributes.name) {
@@ -39,90 +63,57 @@ const metaTags = meta.filter((item) => item.tag !== "title");
         <AstroDebugger page={Astro.props.page} global={Astro.props.global} />
       )
     }
+    <ViewTransitions />
   </head>
   <body>
+    <Header global={Astro.props.global} />
     <slot />
     <Footer global={Astro.props.global} />
+    <style is:global>
+      @font-face {
+        font-family: "pp-editorial-new";
+        src: url("/fonts/PPEditorialNew-Regular.woff2") format("woff2");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "national-2-narrow-medium";
+        src: url("/fonts/national-2-narrow-medium.woff2") format("woff2");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "national-2-compressed-regular";
+        src: url("/fonts/national-2-compressed-regular.woff2") format("woff2");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "national-2-compressed-extrabold";
+        src: url("/fonts/national-2-compressed-extrabold.woff2") format("woff2");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      :root {
+        --font-national-narrow-medium: "national-2-narrow-medium", sans-serif;
+        --font-national-compressed-regular: "national-2-compressed-regular",
+          sans-serif;
+        --font-national-narrow-extrabold: "national-2-narrow-extrabold",
+          sans-serif;
+        --font-pp-editorial-new: "pp-editorial-new", sans-serif;
+      }
+
+      body {
+        font-family: var(--font-national-narrow-medium);
+      }
+    </style>
   </body>
 </html>
-<style is:global>
-  @font-face {
-    font-family: "DistantGalaxy";
-    src: url("/fonts/PPEditorialNew-Regular.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "national-2-narrow-medium";
-    src: url("/fonts/national-2-narrow-medium.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "national-2-compressed-regular";
-    src: url("/fonts/national-2-compressed-regular.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "national-2-compressed-extrabold";
-    src: url("/fonts/national-2-compressed-extrabold.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  *,
-  :after,
-  :before {
-    box-sizing: border-box;
-    border: 0 solid;
-  }
-
-  :root {
-    --background: 255, 255, 255;
-    --color-black: 0, 0, 0;
-    --font-national-narrow: "national-2-narrow-medium", sans-serif;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: rgb(var(--background));
-    color: rgb(var(--color-black));
-    font-family: var(--font-national-narrow);
-  }
-
-  blockquote,
-  dd,
-  dl,
-  figure,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  hr,
-  p,
-  pre {
-    margin: 0;
-  }
-
-  a {
-    color: rgb(var(--color-black));
-  }
-
-  .fd-bu {
-    font-size: 0.75rem;
-    line-height: 0.9375rem;
-    letter-spacing: 0.02em;
-    color: #000000;
-  }
-</style>

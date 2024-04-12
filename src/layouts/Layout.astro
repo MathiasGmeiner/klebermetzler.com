@@ -3,9 +3,8 @@ import type { Props } from "@/types";
 import AstroDebugger from "@/components/AstroDebugger.astro";
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
-import { ViewTransitions, fade } from "astro:transitions";
+import { ViewTransitions } from "astro:transitions";
 
-const { page } = Astro.props;
 const { meta } = Astro.props.page;
 const metaTitle = meta.find((item) => item.tag === "title")?.content;
 const metaTags = meta.filter((item) => item.tag !== "title");

@@ -5,9 +5,11 @@ import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 import { ViewTransitions } from "astro:transitions";
 
-const { meta } = Astro.props.page;
+const page = Astro.props.page;
+const meta = page.meta;
 const metaTitle = meta.find((item) => item.tag === "title")?.content;
 const metaTags = meta.filter((item) => item.tag !== "title");
+const backgroundcolor = page.content.backgroundcolor;
 ---
 
 <!doctype html>
@@ -64,11 +66,11 @@ const metaTags = meta.filter((item) => item.tag !== "title");
     }
     <ViewTransitions />
   </head>
-  <body>
+  <body class="pt-5 xl:pt-10">
     <Header global={Astro.props.global} />
     <slot />
     <Footer global={Astro.props.global} />
-    <style is:global>
+    <style is:global define:vars={{ backgroundcolor }}>
       @font-face {
         font-family: "pp-editorial-new";
         src: url("/fonts/PPEditorialNew-Regular.woff2") format("woff2");
@@ -112,6 +114,7 @@ const metaTags = meta.filter((item) => item.tag !== "title");
 
       body {
         font-family: var(--font-national-narrow-medium);
+        background-color: var(--backgroundcolor);
       }
     </style>
   </body>

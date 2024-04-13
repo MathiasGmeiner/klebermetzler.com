@@ -15,15 +15,6 @@ const templates = {
 };
 
 const Template = templates[page.intendedTemplate] || TemplateFallback;
-
-const backgroundcolor = page.content.backgroundcolor;
 ---
 
-<body>
-  <Template page={page} global={global} />
-</body>
-<style is:global define:vars={{ backgroundcolor }}>
-  body {
-    background-color: var(--backgroundcolor);
-  }
-</style>
+<Template page={page} global={global} />

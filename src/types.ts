@@ -7,6 +7,26 @@ type Link = {
   hash: string | null;
 };
 
+export interface Layout {
+  span: 6 | 12;
+  width: "1/2" | "1/1";
+  blocks: Block[];
+}
+
+type Content = {
+  [key: string]: any;
+};
+
+export interface Block {
+  id: string;
+  type: string;
+  isFirst: boolean;
+  isLast: boolean;
+  prevBlock: string | null;
+  nextBlock: string | null;
+  content: Content;
+}
+
 export interface Global {
   title: string;
   menuWork: Link | null;
@@ -33,7 +53,7 @@ export interface Page {
   }[];
   content: {
     backgroundcolor: string;
-    [key: string]: any;
+    layout: Layout[];
   };
 }
 

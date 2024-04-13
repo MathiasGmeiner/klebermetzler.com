@@ -1,0 +1,10 @@
+---
+const block = Astro.props;
+const content = block.content;
+const HeadlineLevel = content.headlinelevel || "h2";
+---
+
+<div>
+  <HeadlineLevel set:html={content.headline} />
+  <div set:html={content.text} />
+</div>

@@ -1,5 +1,9 @@
 ---
-import Wrapper from "@components/Wrapper.astro";
+import type { Page } from "@/types";
+
+import Layouts from "@components/Layouts.astro";
+
+const page: Page = Astro.props.page;
 ---
 
-<Wrapper> asdf </Wrapper>
+<Layouts page={page} />

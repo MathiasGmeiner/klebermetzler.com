@@ -1,0 +1,18 @@
+---
+import type { Layout, Block as BlockType } from "@/types";
+import BlockFallback from "@/blocks/BlockFallback.astro";
+import BlockText from "@blocks/BlockText.astro";
+const layout: Layout = Astro.props.layout;
+const items: BlockType[] = Astro.props.blocks;
+
+const blocks = {
+  text: BlockText,
+};
+---
+
+{
+  items.map((block) => {
+    const Block = blocks[block.type] || BlockFallback;
+    return <Block {...block} layout={layout} />;
+  })
+}

@@ -1,0 +1,28 @@
+---
+import type { Page } from "@/types";
+import Blocks from "./Blocks.astro";
+
+const page: Page = Astro.props.page;
+---
+
+<div
+  class="flex flex-col gap-y-12 lg:grid lg:grid-cols-2 lg:gap-x-4 xl:gap-x-8 2xl:gap-x-10 2xl:gap-y-24"
+>
+  {
+    page.content.layout?.map((layout) => {
+      if (layout.width === "1/1") {
+        return (
+          <div class="lg:col-span-2 border border-black">
+            <Blocks layout={layout.width} blocks={layout.blocks} />
+          </div>
+        );
+      }
+
+      return (
+        <div class="lg:col-span-1 border border-black">
+          <Blocks layout={layout.width} blocks={layout.blocks} />
+        </div>
+      );
+    })
+  }
+</div>

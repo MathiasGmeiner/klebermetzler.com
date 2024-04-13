@@ -119,6 +119,10 @@ const backgroundcolorMenu = global.backgroundcolorMenu;
 </script>
 
 <style define:vars={{ backgroundcolorMenu }}>
+  body:has([data-header].menu-open) {
+    background-color: var(--backgroundcolorMenu);
+  }
+
   [data-header].menu-open {
     background-color: var(--backgroundcolorMenu);
 

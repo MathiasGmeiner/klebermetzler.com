@@ -24,6 +24,9 @@ export default {
       bu: ["1.25rem", { lineHeight: "1.5625rem", letterSpacing: "0.02em" }],
       head: ["10.625rem", { lineHeight: "8.4375rem" }],
     },
+    colors: {
+      "grey-caption": "#D9D9D980",
+    },
     extend: {},
   },
   future: {

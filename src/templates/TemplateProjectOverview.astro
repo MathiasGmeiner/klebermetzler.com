@@ -3,18 +3,20 @@ import type { Page } from "@/types";
 import { Image } from "astro:assets";
 import iconList from "@/images/iconList.svg";
 import iconGrid from "@/images/iconGrid.svg";
+import menu from "@/images/menu.svg";
 
 const page: Page = Astro.props.page;
 ---
 
 <div class="list-toggle">
-  <button data-trigger-style-list aria-label="Liste">
-    <Image src={iconList} alt="Icon Liste" />
-  </button>
-  <button data-trigger-style-grid arial-label="Raster">
-    <Image src={iconGrid} alt="Icon Raster" />
-  </button>
-  <div class="w-[10.375rem]"></div>
+  <div class="flex justify-between md:gap-x-5 md:justify-start">
+    <button data-trigger-style-list aria-label="Liste">
+      <Image src={iconList} alt="Icon Liste" />
+    </button>
+    <button data-trigger-style-grid arial-label="Raster">
+      <Image src={iconGrid} alt="Icon Raster" />
+    </button>
+  </div>
 </div>
 <h1
   class="text-mobile-head xl:text-head font-nationalCompressedExtrabold uppercase"
@@ -75,14 +77,22 @@ const page: Page = Astro.props.page;
 
 <style>
   .list-toggle {
-    @apply mb-8 w-full flex justify-between;
     margin-bottom: 2rem;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.25rem;
 
     @screen lg {
       display: none;
+    }
+
+    > div {
+      height: 100%;
+    }
+
+    img {
+      height: 7.125rem;
     }
   }
   .project-list {

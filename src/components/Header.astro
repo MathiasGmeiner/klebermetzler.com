@@ -41,6 +41,7 @@ const getMenuLink = (uri) => {
                 <a
                   href={getMenuLink(global.menuWork.href)}
                   aria-label={global.menuWork.title}
+                  class="menu-icon"
                 >
                   <Image src={menuWork} alt={global.menuWork.title} />
                 </a>
@@ -53,6 +54,7 @@ const getMenuLink = (uri) => {
                 <a
                   href={getMenuLink(global.menuInfo.href)}
                   aria-label={global.menuInfo.title}
+                  class="menu-icon"
                 >
                   <Image src={menuInfo} alt={global.menuInfo.title} />
                 </a>
@@ -65,6 +67,7 @@ const getMenuLink = (uri) => {
                 <a
                   href={getMenuLink(global.menuBlog.href)}
                   aria-label={global.menuBlog.title}
+                  class="menu-icon"
                 >
                   <Image src={menuBlog} alt={global.menuBlog.title} />
                 </a>
@@ -77,6 +80,7 @@ const getMenuLink = (uri) => {
                 <a
                   href={getMenuLink(global.menuJobs.href)}
                   aria-label={global.menuJobs.title}
+                  class="menu-icon"
                 >
                   <Image src={menuJobs} alt={global.menuJobs.title} />
                 </a>
@@ -88,10 +92,13 @@ const getMenuLink = (uri) => {
       <div
         class="flex flex-col items-end gap-y-5 col-start-2 pointer-events-auto"
       >
-        <button aria-label="Menu" data-trigger-menu-open
+        <button aria-label="Menu" data-trigger-menu-open class="menu-icon"
           ><Image src={menu} alt="Menu" /></button
         >
-        <button aria-label="Menu close" class="hidden" data-trigger-menu-close
+        <button
+          aria-label="Menu close"
+          class="menu-icon hidden"
+          data-trigger-menu-close
           ><Image src={menuClose} alt="Menu close" /></button
         >
       </div>
@@ -152,6 +159,12 @@ const getMenuLink = (uri) => {
 
     @screen xl {
       padding: 2.5rem;
+    }
+  }
+
+  .menu-icon {
+    img {
+      height: 7.125rem;
     }
   }
 </style>

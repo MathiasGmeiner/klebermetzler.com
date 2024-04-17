@@ -23,6 +23,8 @@ export default {
       copy: ["3.125rem", { lineHeight: "3.875rem" }],
       bu: ["1.25rem", { lineHeight: "1.5625rem", letterSpacing: "0.02em" }],
       head: ["10.625rem", { lineHeight: "8.4375rem" }],
+      "sub-bold": ["4.6875rem", { lineHeight: 1.15 }],
+      "sub-light": ["4.6875rem", { lineHeight: 1 }],
     },
     colors: {
       "grey-caption": "#D9D9D980",

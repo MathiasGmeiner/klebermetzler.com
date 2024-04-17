@@ -7,7 +7,7 @@ import iconGrid from "@/images/iconGrid.svg";
 const page: Page = Astro.props.page;
 ---
 
-<div class="mb-8 w-full flex justify-between">
+<div class="list-toggle">
   <button data-trigger-style-list aria-label="Liste">
     <Image src={iconList} alt="Icon Liste" />
   </button>
@@ -29,7 +29,7 @@ const page: Page = Astro.props.page;
 
       return (
         <li>
-          <a class={item.uri}>
+          <a href={item.uri}>
             <div class="image border-2">
               <Image
                 src={item.image.src}
@@ -42,10 +42,10 @@ const page: Page = Astro.props.page;
               <div class="text-mobile-bu bg-grey-caption inline-flex px-1.5 absolute bottom-0 left-0">{`${item.customer} ${item.projectname}`}</div>
             </div>
             <div class="title">
-              <div class="text-mobile-sub-bold font-nationalCompressedExtrabold whitespace-nowrap">
+              <div class="text-mobile-sub-bold lg:text-sub-bold font-nationalCompressedExtrabold whitespace-nowrap">
                 {item.customer}
               </div>
-              <div class="text-mobile-sub-light font-ppeditorialnew whitespace-nowrap">
+              <div class="text-mobile-sub-light lg:text-sub-light font-ppeditorialnew whitespace-nowrap">
                 {item.projectname}
               </div>
             </div>
@@ -64,27 +64,46 @@ const page: Page = Astro.props.page;
     const triggerStyleGrid = document.querySelector(
       "[data-trigger-style-grid]"
     );
-    triggerStyleList.addEventListener("click", () => {
+    triggerStyleList?.addEventListener("click", () => {
       document.querySelector("[data-list]").classList.remove("grid");
     });
-    triggerStyleGrid.addEventListener("click", () => {
+    triggerStyleGrid?.addEventListener("click", () => {
       document.querySelector("[data-list]").classList.add("grid");
     });
   });
 </script>
 
 <style>
+  .list-toggle {
+    @apply mb-8 w-full flex justify-between;
+    margin-bottom: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    @screen lg {
+      display: none;
+    }
+  }
   .project-list {
     margin-top: 1.25rem;
     display: flex;
     flex-direction: column;
     row-gap: 0.75rem;
+
+    @screen lg {
+      margin-top: 3.75rem;
+    }
   }
 
   .project-list .title {
     display: flex;
     column-gap: 0.5rem;
     align-items: flex-end;
+
+    @screen lg {
+      column-gap: 1.5rem;
+    }
   }
 
   .project-list .image {

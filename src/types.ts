@@ -53,6 +53,7 @@ export interface Page {
   }[];
   content: {
     backgroundcolor: string;
+    textcolor: string;
     headline?: string;
     layout: Layout[];
     items?: any[];

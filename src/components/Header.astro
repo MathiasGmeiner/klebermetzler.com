@@ -20,12 +20,9 @@ const getMenuLink = (uri) => {
 };
 ---
 
-<header
-  class="fixed top-0 right-0 left-0 bottom-0 p-5 xl:p-10 pointer-events-none"
-  data-header
->
+<header class="header" data-header>
   <div
-    class="absolute top-0 bottom-0 left-0 right-0 px-8 py-14 z-0 hidden"
+    class="absolute top-0 bottom-0 left-0 right-0 px-8 py-14 hidden"
     data-tag
   >
     <Image
@@ -140,6 +137,21 @@ const getMenuLink = (uri) => {
     [data-menu-secondary],
     [data-tag] {
       display: block;
+    }
+  }
+
+  .header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding: 1.25rem;
+    pointer-events: none;
+    z-index: 1;
+
+    @screen xl {
+      padding: 2.5rem;
     }
   }
 </style>

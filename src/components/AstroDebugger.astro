@@ -1,12 +1,15 @@
 ---
 import type { Props } from "@/types";
 
+export const prerender = false;
 const { page, global } = Astro.props;
+const url = Astro.url;
 ---
 
 <astro-debugger
   data-page={JSON.stringify(page)}
-  data-global={JSON.stringify(global)}></astro-debugger>
+  data-global={JSON.stringify(global)}
+  data-url={JSON.stringify(url)}></astro-debugger>
 
 <script>
   class AstroDebugger extends HTMLElement {
@@ -16,8 +19,10 @@ const { page, global } = Astro.props;
     connectedCallback() {
       const page = JSON.parse(this.dataset.page);
       const global = JSON.parse(this.dataset.global);
+      const url = JSON.parse(this.dataset.url);
       console.log("page", page);
       console.log("global", global);
+      console.log("url", url);
     }
   }
 

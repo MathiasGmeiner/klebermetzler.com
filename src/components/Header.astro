@@ -1,5 +1,5 @@
 ---
-import type { Global } from "@/types";
+import type { Props } from "@/types";
 import { Image } from "astro:assets";
 import menu from "@/images/menu.svg";
 import menuClose from "@/images/menuClose.svg";
@@ -9,8 +9,15 @@ import menuBlog from "@/images/menuBlog.svg";
 import menuJobs from "@/images/menuJobs.svg";
 import menuTagMobile from "@/images/menuTagMobile.svg";
 
-const global: Global = Astro.props.global;
+const { global, preview } = Astro.props;
 const backgroundcolorMenu = global.backgroundcolorMenu;
+
+const getMenuLink = (uri) => {
+  if (preview) {
+    return `/preview?slug=${uri.slice(1)}`;
+  }
+  return uri;
+};
 ---
 
 <header
@@ -35,7 +42,7 @@ const backgroundcolorMenu = global.backgroundcolorMenu;
             global.menuWork && (
               <li>
                 <a
-                  href={global.menuWork.href}
+                  href={getMenuLink(global.menuWork.href)}
                   aria-label={global.menuWork.title}
                 >
                   <Image src={menuWork} alt={global.menuWork.title} />
@@ -47,7 +54,7 @@ const backgroundcolorMenu = global.backgroundcolorMenu;
             global.menuInfo && (
               <li>
                 <a
-                  href={global.menuInfo.href}
+                  href={getMenuLink(global.menuInfo.href)}
                   aria-label={global.menuInfo.title}
                 >
                   <Image src={menuInfo} alt={global.menuInfo.title} />
@@ -59,7 +66,7 @@ const backgroundcolorMenu = global.backgroundcolorMenu;
             global.menuBlog && (
               <li>
                 <a
-                  href={global.menuBlog.href}
+                  href={getMenuLink(global.menuBlog.href)}
                   aria-label={global.menuBlog.title}
                 >
                   <Image src={menuBlog} alt={global.menuBlog.title} />
@@ -71,7 +78,7 @@ const backgroundcolorMenu = global.backgroundcolorMenu;
             global.menuJobs && (
               <li>
                 <a
-                  href={global.menuJobs.href}
+                  href={getMenuLink(global.menuJobs.href)}
                   aria-label={global.menuJobs.title}
                 >
                   <Image src={menuJobs} alt={global.menuJobs.title} />

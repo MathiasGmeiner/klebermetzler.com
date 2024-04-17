@@ -5,12 +5,13 @@ import Wrapper from "./Wrapper.astro";
 const global: Global = Astro.props.global;
 ---
 
-<footer class="fd-bu">
+<footer class="defaultMt">
   <Wrapper>
-    <div class="text-mobile-bu">
-      <h5>{global.footerContactLabel}</h5>
-      <a href={global.footerContactLink.href}
-        >{global.footerContactLink.title}</a
+    <div class="lg:flex lg:justify-between lg:items-end">
+      <h5 class="text-mobile-bu lg:text-bu">{global.footerContactLabel}</h5>
+      <a
+        class="text-mobile-bu lg:text-copy"
+        href={global.footerContactLink.href}>{global.footerContactLink.title}</a
       >
     </div>
   </Wrapper>

@@ -53,11 +53,14 @@ export interface Page {
   }[];
   content: {
     backgroundcolor: string;
+    headline?: string;
     layout: Layout[];
+    items?: any[];
   };
 }
 
 export interface Props {
   page: Page;
   global: Global;
+  preview?: boolean;
 }

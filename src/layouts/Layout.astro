@@ -6,6 +6,7 @@ import Header from "@components/Header.astro";
 import { ViewTransitions } from "astro:transitions";
 
 const page = Astro.props.page;
+const preview = Astro.props.preview;
 const meta = page.meta;
 const metaTitle = meta.find((item) => item.tag === "title")?.content;
 const metaTags = meta.filter((item) => item.tag !== "title");
@@ -61,13 +62,13 @@ const backgroundcolor = page.content.backgroundcolor;
     <title>{metaTitle}</title>
     {
       import.meta.env.DEV && (
-        <AstroDebugger page={Astro.props.page} global={Astro.props.global} />
+        <AstroDebugger page={page} global={Astro.props.global} />
       )
     }
     <ViewTransitions />
   </head>
   <body class="pt-5 xl:pt-10">
-    <Header global={Astro.props.global} />
+    <Header page={page} global={Astro.props.global} preview={preview} />
     <slot />
     <Footer global={Astro.props.global} />
     <style is:global define:vars={{ backgroundcolor }}>
@@ -107,7 +108,7 @@ const backgroundcolor = page.content.backgroundcolor;
         --font-national-narrow-medium: "national-2-narrow-medium", sans-serif;
         --font-national-compressed-regular: "national-2-compressed-regular",
           sans-serif;
-        --font-national-narrow-extrabold: "national-2-narrow-extrabold",
+        --font-national-compressed-extrabold: "national-2-compressed-extrabold",
           sans-serif;
         --font-pp-editorial-new: "pp-editorial-new", sans-serif;
       }
@@ -115,6 +116,18 @@ const backgroundcolor = page.content.backgroundcolor;
       body {
         font-family: var(--font-national-narrow-medium);
         background-color: var(--backgroundcolor);
+      }
+
+      .defaultMt {
+        margin-top: 3.125rem;
+
+        @screen lg {
+          margin-top: 4.6875rem;
+        }
+
+        @screen xl {
+          margin-top: 6.25rem;
+        }
       }
     </style>
   </body>

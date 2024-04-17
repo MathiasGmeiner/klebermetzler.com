@@ -1,5 +1,61 @@
 ---
-
+import type { Page } from "@/types";
+import { Image } from "astro:assets";
+const page: Page = Astro.props.page;
 ---
 
-asdf
+<div class="mb-8">
+  <button data-trigger-style-list>Liste</button>
+  <button data-trigger-style-grid>Grid</button>
+</div>
+<h1
+  class="text-mobile-head xl:text-head font-nationalCompressedExtrabold uppercase"
+  set:html={page.content.headline}
+/>
+<ul data-list>
+  {
+    page.content.items.map((item) => (
+      <li>
+        <h2>
+          <a class="flex gap-x-2 items-end">
+            <div>
+              <div class="text-mobile-sub-bold font-nationalNarrowMedium whitespace-nowrap">
+                {item.customer}
+              </div>
+              <div class="text-mobile-sub-light font-ppeditorialnew whitespace-nowrap">
+                {item.projectname}
+              </div>
+            </div>
+            <div>
+              {item.image && (
+                <Image
+                  src={item.image.src}
+                  alt={item.image.alt}
+                  width={item.image.width}
+                  height={item.image.height}
+                  widths={[320, 400, 480, 560, item.image.widths]}
+                  class="w-full"
+                />
+              )}
+            </div>
+          </a>
+        </h2>
+      </li>
+    ))
+  }
+</ul>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const triggerStyleList = document.querySelector(
+      "[data-trigger-style-list]"
+    );
+    const triggerStyleGrid = document.querySelector(
+      "[data-trigger-style-grid]"
+    );
+    triggerStyleList.addEventListener("click", () => {
+      document.querySelector("[data-list]").classList.remove("grid");
+      document.querySelector("[data-list]").classList.add("grid");
+    });
+  });
+</script>

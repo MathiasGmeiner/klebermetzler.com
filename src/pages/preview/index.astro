@@ -1,0 +1,20 @@
+---
+import KirbyPage from "@components/KirbyPage.astro";
+import Wrapper from "@components/Wrapper.astro";
+import Layout from "@layouts/Layout.astro";
+import { getGlobal, getPage } from "@lib/kirbycms";
+
+export const prerender = false;
+const params = new URLSearchParams(Astro.url.search);
+const slug = params.get("slug");
+
+const page = await getPage(slug);
+const global = await getGlobal();
+const preview = true;
+---
+
+<Layout page={page} global={global} preview={preview}>
+  <Wrapper>
+    <KirbyPage page={page} global={global} />
+  </Wrapper>
+</Layout>

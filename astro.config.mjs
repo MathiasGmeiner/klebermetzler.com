@@ -15,6 +15,6 @@ export default defineConfig({
     imageService: true,
   }),
   image: {
-    domains: ["cms.klebermeztler.com"],
+    domains: ["cms.klebermetzler.com", "cms.klebermetzler.test"],
   },
 });

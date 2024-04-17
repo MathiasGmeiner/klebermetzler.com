@@ -12,21 +12,13 @@ const page: Page = Astro.props.page;
   class="text-mobile-head xl:text-head font-nationalCompressedExtrabold uppercase"
   set:html={page.content.headline}
 />
-<ul data-list>
+<ul data-list class="project-list">
   {
     page.content.items.map((item) => (
       <li>
         <h2>
-          <a class="flex gap-x-2 items-end">
-            <div>
-              <div class="text-mobile-sub-bold font-nationalNarrowMedium whitespace-nowrap">
-                {item.customer}
-              </div>
-              <div class="text-mobile-sub-light font-ppeditorialnew whitespace-nowrap">
-                {item.projectname}
-              </div>
-            </div>
-            <div>
+          <a class="">
+            <div class="image">
               {item.image && (
                 <Image
                   src={item.image.src}
@@ -37,6 +29,14 @@ const page: Page = Astro.props.page;
                   class="w-full"
                 />
               )}
+            </div>
+            <div class="flex gap-x-2 items-end">
+              <div class="text-mobile-sub-bold font-nationalNarrowMedium whitespace-nowrap">
+                {item.customer}
+              </div>
+              <div class="text-mobile-sub-light font-ppeditorialnew whitespace-nowrap">
+                {item.projectname}
+              </div>
             </div>
           </a>
         </h2>
@@ -55,7 +55,18 @@ const page: Page = Astro.props.page;
     );
     triggerStyleList.addEventListener("click", () => {
       document.querySelector("[data-list]").classList.remove("grid");
+    });
+    triggerStyleGrid.addEventListener("click", () => {
       document.querySelector("[data-list]").classList.add("grid");
     });
   });
 </script>
+
+<style>
+  .project-list .image {
+    display: none;
+  }
+  .project-list.grid .image {
+    display: block;
+  }
+</style>

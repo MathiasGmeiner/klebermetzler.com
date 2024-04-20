@@ -1,0 +1,138 @@
+---
+const block = Astro.props;
+---
+
+<div class="wrapper">
+  <div
+    class="video"
+    style={`aspect-ratio: ${block.content.width} / ${block.content.height}`}
+  >
+    <media-player src={block.content.url} playsinline>
+      <media-provider>
+        <media-poster alt="Video Poster"
+          ><img src={block.content.poster.link} /></media-poster
+        >
+      </media-provider>
+      <media-controls>
+        <media-controls-group>
+          <media-tooltip>
+            <media-tooltip-trigger>
+              <media-play-button class="text-mobile-copy lg:text-copy">
+                <div>Play</div>
+                <div>Pause</div>
+              </media-play-button>
+            </media-tooltip-trigger>
+          </media-tooltip>
+        </media-controls-group>
+      </media-controls>
+    </media-player>
+  </div>
+</div>
+
+<script>
+  import "vidstack/player";
+  import "vidstack/player/ui";
+</script>
+
+<style>
+  .wrapper {
+    padding: 3rem;
+
+    @screen md {
+      padding: 6rem;
+    }
+
+    @screen lg {
+      padding: 10rem;
+    }
+  }
+
+  .video {
+    position: relative;
+  }
+
+  media-player,
+  media-provider,
+  video {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  media-poster {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  media-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  media-player[data-started] media-poster {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  media-controls {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--color-black);
+  }
+
+  media-play-button {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--color-black);
+    background-color: var(--color-yellow);
+    transition: opacity 0.3s;
+
+    @screen lg {
+      width: 7rem;
+      height: 7rem;
+    }
+
+    @screen xl {
+      width: 10rem;
+      height: 10rem;
+    }
+
+    div:last-child {
+      display: none;
+    }
+  }
+
+  media-player[data-playing] media-play-button {
+    opacity: 0;
+    pointer-events: none;
+
+    div:first-child {
+      display: none;
+    }
+
+    div:last-child {
+      display: block;
+    }
+  }
+
+  media-player[data-hover] media-play-button {
+    opacity: 1;
+    pointer-events: all;
+  }
+</style>

@@ -1,0 +1,15 @@
+---
+const block = Astro.props;
+const content = block.content;
+const style = block.content.style;
+---
+
+<div
+  class:list={[
+    "fd-highlight",
+    { "font-ppeditorialnew": style === "light" },
+    { "font-nationalCompressedExtrabold": style !== "light" },
+  ]}
+  set:html={content.text}
+/>
+<style></style>

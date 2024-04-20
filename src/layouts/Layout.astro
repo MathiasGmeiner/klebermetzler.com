@@ -112,6 +112,9 @@ const textcolor = page.content.textcolor;
         --font-national-compressed-extrabold: "national-2-compressed-extrabold",
           sans-serif;
         --font-pp-editorial-new: "pp-editorial-new", sans-serif;
+        --spacing: clamp(3.125rem, 8vw, 9.375rem);
+        --color-black: #000;
+        --color-yellow: rgba(255, 237, 0, 0.5);
       }
 
       body {
@@ -120,16 +123,12 @@ const textcolor = page.content.textcolor;
         color: var(--textcolor);
       }
 
-      .defaultMt {
-        margin-top: 3.125rem;
+      .spacingTop {
+        margin-top: var(--spacing);
+      }
 
-        @screen lg {
-          margin-top: 4.6875rem;
-        }
-
-        @screen xl {
-          margin-top: 6.25rem;
-        }
+      video {
+        width: 100%;
       }
     </style>
   </body>

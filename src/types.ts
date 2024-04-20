@@ -13,7 +13,7 @@ export interface Layout {
   blocks: Block[];
 }
 
-type Content = {
+type BlockContent = {
   [key: string]: any;
 };
 
@@ -24,7 +24,7 @@ export interface Block {
   isLast: boolean;
   prevBlock: string | null;
   nextBlock: string | null;
-  content: Content;
+  content: BlockContent;
 }
 
 export interface Global {
@@ -39,6 +39,17 @@ export interface Global {
   footerContactLink: Link;
 }
 
+type Content = {
+  backgroundcolor: string;
+  textcolor: string;
+  headline?: string;
+  customer?: string;
+  subtitle?: string | null;
+  projectname?: string;
+  layout: Layout[];
+  items?: any[];
+};
+
 export interface Page {
   title: string;
   intendedTemplate: string;
@@ -51,13 +62,7 @@ export interface Page {
     } | null;
     content: string | null;
   }[];
-  content: {
-    backgroundcolor: string;
-    textcolor: string;
-    headline?: string;
-    layout: Layout[];
-    items?: any[];
-  };
+  content: Content;
 }
 
 export interface Props {

@@ -6,4 +6,39 @@ import Layouts from "@components/Layouts.astro";
 const page: Page = Astro.props.page;
 ---
 
-<Layouts page={page} />
+<div class="title">
+  <div class="content">
+    <h1 class="fd-head">
+      {page.content.customer}<br />{page.content.projectname}
+    </h1>
+    {
+      page.content.subtitle && (
+        <h2 class="fd-subtitle mt-2 md:mt-6 lg:mt-12">
+          {page.content.subtitle}
+        </h2>
+      )
+    }
+  </div>
+</div>
+<div class="spacingTop">
+  <Layouts page={page} />
+</div>
+
+<style>
+  .title {
+    display: grid;
+    column-gap: 1.25rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    @screen md {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: 2.75rem;
+    }
+  }
+
+  .content {
+    @screen md {
+      grid-column: span 3;
+    }
+  }
+</style>

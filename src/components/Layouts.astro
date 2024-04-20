@@ -5,24 +5,45 @@ import Blocks from "./Blocks.astro";
 const page: Page = Astro.props.page;
 ---
 
-<div
-  class="flex flex-col gap-y-12 lg:grid lg:grid-cols-2 lg:gap-x-4 xl:gap-x-8 2xl:gap-x-10 2xl:gap-y-24"
->
+<div class="layout">
   {
     page.content.layout?.map((layout) => {
       if (layout.width === "1/1") {
         return (
-          <div class="lg:col-span-2 border border-black">
+          <div class="md:col-span-2">
             <Blocks layout={layout.width} blocks={layout.blocks} />
           </div>
         );
       }
 
       return (
-        <div class="lg:col-span-1 border border-black">
+        <div class="md:col-span-1">
           <Blocks layout={layout.width} blocks={layout.blocks} />
         </div>
       );
     })
   }
 </div>
+
+<style>
+  .layout {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3rem;
+
+    @screen md {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 1rem;
+      row-gap: var(--spacing);
+    }
+
+    @screen lg {
+      column-gap: 2rem;
+    }
+
+    @screen xl {
+      column-gap: 2.5rem;
+    }
+  }
+</style>

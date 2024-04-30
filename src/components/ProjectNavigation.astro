@@ -1,0 +1,57 @@
+---
+import type { Page } from "@/types";
+
+const page: Page = Astro.props.page;
+---
+
+<div class="spacingTop">
+  <div class="text-mobile-bu md:text-bu mb-6">Ende</div>
+  <div class="flex justify-center gap-x-4">
+    {
+      page.content.prev && (
+        <a href={page.content.prev} class="item">
+          <div class="text-mobile-copy lg:text-copy text-center">
+            Projekt
+            <br />
+            davor
+          </div>
+        </a>
+      )
+    }
+    {
+      page.content.next && (
+        <a href={page.content.next} class="item">
+          <div class="text-mobile-copy lg:text-copy text-center">
+            nächstes
+            <br />
+            Projekt
+          </div>
+        </a>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color-black);
+    border-radius: 9999px;
+    flex-basis: 50%;
+    flex-shrink: 1;
+    flex-grow: 0;
+    aspect-ratio: 1 / 1;
+    background-color: var(--color-grey-transparent);
+
+    @screen lg {
+      border-width: 4px;
+      flex-basis: 228px;
+    }
+
+    @screen xl {
+      flex-basis: 328px;
+    }
+  }
+</style>

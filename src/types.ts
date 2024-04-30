@@ -48,6 +48,8 @@ type Content = {
   projectname?: string;
   layout: Layout[];
   items?: any[];
+  prev?: string | null;
+  next?: string | null;
 };
 
 export interface Page {

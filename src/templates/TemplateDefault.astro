@@ -2,6 +2,7 @@
 import type { Page } from "@/types";
 
 import Layouts from "@components/Layouts.astro";
+import ProjectNavigation from "@components/ProjectNavigation.astro";
 
 const page: Page = Astro.props.page;
 ---
@@ -23,6 +24,7 @@ const page: Page = Astro.props.page;
 <div class="spacingTop">
   <Layouts page={page} />
 </div>
+{page.intendedTemplate === "project" && <ProjectNavigation page={page} />}
 
 <style>
   .title {

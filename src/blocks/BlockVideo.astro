@@ -1,14 +1,18 @@
 ---
 const block = Astro.props;
+const width = block.content.width;
+const height = block.content.height;
 
 const autoplay = block.content.autoplay ? "autoplay" : null;
 ---
 
-<div class="wrapper">
-  <div
-    class="video"
-    style={`aspect-ratio: ${block.content.width} / ${block.content.height}`}
-  >
+<div
+  class:list={[
+    { wrapper: width < height },
+    { "wrapper-landscape": width > height },
+  ]}
+>
+  <div class="video" style={`aspect-ratio: ${width} / ${height}`}>
     <media-player
       src={block.content.url}
       playsinline
@@ -45,6 +49,18 @@ const autoplay = block.content.autoplay ? "autoplay" : null;
 <style>
   .wrapper {
     padding: 3rem;
+
+    @screen md {
+      padding: 6rem;
+    }
+
+    @screen lg {
+      padding: 10rem;
+    }
+  }
+
+  .wrapper-landscape {
+    padding: 3rem 0;
 
     @screen md {
       padding: 6rem;

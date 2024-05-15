@@ -12,7 +12,7 @@ import menuTagMobile from "@/images/menuTagMobile.svg";
 const { global, preview } = Astro.props;
 const backgroundcolorMenu = global.backgroundcolorMenu;
 
-const getMenuLink = (uri) => {
+const getMenuLink = (uri: string | any[]) => {
   if (preview) {
     return `/preview?slug=${uri.slice(1)}`;
   }

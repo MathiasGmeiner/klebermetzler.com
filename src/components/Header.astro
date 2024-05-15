@@ -3,11 +3,13 @@ import type { Props } from "@/types";
 import { Image } from "astro:assets";
 import menu from "@/images/menu.svg";
 import menuClose from "@/images/menuClose.svg";
+import menuCloseDesktop from "@/images/menuCloseDesktop.svg";
 import menuWork from "@/images/menuWork.svg";
 import menuInfo from "@/images/menuInfo.svg";
 import menuBlog from "@/images/menuBlog.svg";
 import menuJobs from "@/images/menuJobs.svg";
 import menuTagMobile from "@/images/menuTagMobile.svg";
+import menuTagDesktop from "@/images/menuTagDesktop.svg";
 
 const { global, preview } = Astro.props;
 const backgroundcolorMenu = global.backgroundcolorMenu;
@@ -25,19 +27,30 @@ const getMenuLink = (uri) => {
     class="absolute top-0 bottom-0 left-0 right-0 px-8 py-14 hidden"
     data-tag
   >
-    <Image
-      src={menuTagMobile}
-      alt="klebermetzler"
-      class="w-full h-full object-fill"
-    />
+    <a href="/">
+      <Image
+        src={menuTagMobile}
+        alt="klebermetzler"
+        class="w-full h-full object-fill landscape:hidden"
+      />
+      <Image
+        src={menuTagDesktop}
+        alt="klebermetzler"
+        class="w-full h-full object-fill hidden landscape:block"
+      />
+    </a>
   </div>
-  <div class="flex flex-col justify-between h-full relative">
+  <div
+    class="flex flex-col justify-between h-full relative pointer-events-none"
+  >
     <div class="grid grid-cols-2 md:grid-cols-4 gap-x-5 md:gap-x-[2.75rem]">
       <nav class="hidden" data-nav>
-        <ul class="flex flex-col gap-y-5 pointer-events-auto">
+        <ul
+          class="flex flex-col md:grid md:grid-cols-2 md:w-full gap-y-5 md:gap-x-[2.75rem] pointer-events-auto"
+        >
           {
             global.menuWork && (
-              <li>
+              <li class="md:row-start-1">
                 <a
                   href={getMenuLink(global.menuWork.href)}
                   aria-label={global.menuWork.title}
@@ -50,7 +63,7 @@ const getMenuLink = (uri) => {
           }
           {
             global.menuInfo && (
-              <li>
+              <li class="md:row-start-2">
                 <a
                   href={getMenuLink(global.menuInfo.href)}
                   aria-label={global.menuInfo.title}
@@ -99,7 +112,11 @@ const getMenuLink = (uri) => {
           aria-label="Menu close"
           class="menu-icon hidden"
           data-trigger-menu-close
-          ><Image src={menuClose} alt="Menu close" /></button
+          ><Image src={menuClose} alt="Menu close" class="md:hidden" /><Image
+            src={menuCloseDesktop}
+            alt="Menu close"
+            class="hidden md:block"
+          /></button
         >
       </div>
     </div>
@@ -136,17 +153,6 @@ const getMenuLink = (uri) => {
     background-color: var(--backgroundcolorMenu);
   }
 
-  [data-header].menu-open {
-    background-color: var(--backgroundcolorMenu);
-
-    [data-nav],
-    [data-trigger-menu-close],
-    [data-menu-secondary],
-    [data-tag] {
-      display: block;
-    }
-  }
-
   .header {
     position: fixed;
     top: 0;
@@ -162,7 +168,28 @@ const getMenuLink = (uri) => {
     }
   }
 
+  .header.menu-open {
+    background-color: var(--backgroundcolorMenu);
+    pointer-events: all;
+
+    [data-nav],
+    [data-trigger-menu-close],
+    [data-menu-secondary],
+    [data-tag] {
+      display: block;
+    }
+  }
+
+  .header.menu-open [data-nav] {
+    @screen md {
+      display: flex;
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+  }
+
   .menu-icon {
+    pointer-events: auto;
     @screen md {
       width: 100%;
     }

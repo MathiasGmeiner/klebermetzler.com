@@ -5,48 +5,77 @@ import { Image } from "astro:assets";
 const page: Page = Astro.props.page;
 ---
 
-<swiper-container>
-  {
-    page.content.slider?.map((item) => {
-      const { mobile, desktop } = item.image;
-      return (
-        <swiper-slide class="item">
-          <div class="image">
-            <Image
-              src={mobile.src}
-              alt={mobile.alt}
-              width={mobile.width}
-              height={mobile.height}
-              widths={[320, 400, 640, 800, 1000]}
-              sizes="100vw"
-              class="mobile"
+<div class="swiper">
+  <div class="swiper-wrapper">
+    {
+      page.content.slider?.map((item) => {
+        const { mobile, desktop } = item.image;
+        return (
+          <div class="swiper-slide item">
+            <div class="image">
+              <Image
+                src={mobile.src}
+                alt={mobile.alt}
+                width={mobile.width}
+                height={mobile.height}
+                widths={[320, 400, 640, 800, 1000]}
+                sizes="100vw"
+                class="mobile"
+              />
+              <Image
+                src={desktop.src}
+                alt={desktop.alt}
+                width={desktop.width}
+                height={desktop.height}
+                widths={[800, 1000, 1200, 1400, 1800, 2000, 2400]}
+                sizes="100vw"
+                class="desktop"
+              />
+              {item.caption && (
+                <div class="caption fd-subtitle">{item.caption}</div>
+              )}
+            </div>
+            <a
+              class="link"
+              href={item.link.href}
+              aria-label={item.link.title}
             />
-            <Image
-              src={desktop.src}
-              alt={desktop.alt}
-              width={desktop.width}
-              height={desktop.height}
-              widths={[800, 1000, 1200, 1400, 1800, 2000, 2400]}
-              sizes="100vw"
-              class="desktop"
-            />
-            {item.caption && (
-              <div class="caption fd-subtitle">{item.caption}</div>
-            )}
           </div>
-          <a class="link" href={item.link.href} aria-label={item.link.title} />
-        </swiper-slide>
-      );
-    })
-  }
-</swiper-container>
+        );
+      })
+    }
+  </div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
 
 <script>
-  import { register } from "swiper/element/bundle";
-  register();
+  import Swiper from "swiper";
+  import { Navigation } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/navigation";
+
+  const swiper = new Swiper(".swiper", {
+    modules: [Navigation],
+    loop: true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
 </script>
 
 <style>
+  .swiper-button-prev {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 2rem;
+    height: 2rem;
+    background: var(--color-black);
+  }
   .item {
     width: 100%;
     height: 100vh;

@@ -1,5 +1,7 @@
 ---
 const block = Astro.props;
+
+const autoplay = block.content.autoplay ? "autoplay" : null;
 ---
 
 <div class="wrapper">
@@ -7,7 +9,13 @@ const block = Astro.props;
     class="video"
     style={`aspect-ratio: ${block.content.width} / ${block.content.height}`}
   >
-    <media-player src={block.content.url} playsinline>
+    <media-player
+      src={block.content.url}
+      playsinline
+      {autoplay}
+      loop={block.content.loop}
+      muted={block.content.muted}
+    >
       <media-provider>
         <media-poster alt="Video Poster"
           ><img src={block.content.poster.link} /></media-poster

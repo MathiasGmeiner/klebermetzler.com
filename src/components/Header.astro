@@ -101,7 +101,7 @@ const getMenuLink = (uri) => {
         class="flex flex-col items-end gap-y-5 col-start-2 md:col-start-4 pointer-events-auto"
       >
         <button aria-label="Menu" data-trigger-menu-open class="menu-icon"
-          ><Image src={menu} alt="Menu" /></button
+          ><Image src={menu} alt="Menu" loading="eager" /></button
         >
         <button
           aria-label="Menu close"
@@ -158,7 +158,7 @@ const getMenuLink = (uri) => {
     pointer-events: none;
     z-index: 1;
 
-    @screen xl {
+    @screen lg {
       padding: 2.5rem;
     }
   }

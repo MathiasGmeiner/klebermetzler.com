@@ -8,7 +8,7 @@ import menu from "@/images/menu.svg";
 const page: Page = Astro.props.page;
 ---
 
-<div class="list-toggle">
+<div class="list-toggle-mobile">
   <div class="flex justify-between md:gap-x-5 md:justify-start">
     <button data-trigger-style-list aria-label="Liste">
       <Image src={iconList} alt="Icon Liste" />
@@ -18,10 +18,7 @@ const page: Page = Astro.props.page;
     </button>
   </div>
 </div>
-<h1
-  class="text-mobile-head xl:text-head font-nationalCompressedExtrabold uppercase"
-  set:html={page.content.headline}
-/>
+<h1 class="fd-head" set:html={page.content.headline} />
 <ul data-list class="project-list">
   {
     page.content.items.map((item) => {
@@ -76,14 +73,14 @@ const page: Page = Astro.props.page;
 </script>
 
 <style>
-  .list-toggle {
+  .list-toggle-mobile {
     margin-bottom: 2rem;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 1.25rem;
 
-    @screen lg {
+    @screen md {
       display: none;
     }
 

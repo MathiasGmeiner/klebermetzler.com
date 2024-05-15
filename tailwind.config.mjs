@@ -99,6 +99,20 @@ const fontSizes = {
       lineHeight: "5.625rem",
     },
   },
+  sublight: {
+    sm: {
+      fontSize: "1.5625rem",
+      lineHeight: "2rem",
+    },
+    lg: {
+      fontSize: "3.125rem",
+      lineHeight: "3.875rem",
+    },
+    xl: {
+      fontSize: "4.6875rem",
+      lineHeight: "5.625rem",
+    },
+  },
 };
 
 export default {
@@ -146,7 +160,7 @@ export default {
         fontSizes.textHeadline.lg.fontSize,
         { lineHeight: fontSizes.textHeadline.lg.lineHeight },
       ],
-      "sub-light": ["4.6875rem", { lineHeight: 1 }],
+      "sub-light": [fontSizes.sublight.lg.fontSize, { lineHeight: 1 }],
     },
     colors: {
       "grey-caption": "#D9D9D980",
@@ -260,6 +274,56 @@ const fontDefinitions = {
     "@screen xl": {
       fontSize: fontSizes.copy.xl.fontSize,
       lineHeight: fontSizes.copy.xl.lineHeight,
+    },
+  },
+  ".fd-sublight": {
+    fontSize: fontSizes.sublight.sm.fontSize,
+    lineHeight: fontSizes.sublight.sm.lineHeight,
+    fontFamily: fonts.ppeditorialnew,
+
+    "@screen lg": {
+      fontSize: fontSizes.sublight.lg.fontSize,
+      lineHeight: fontSizes.sublight.lg.lineHeight,
+    },
+
+    "@screen xl": {
+      fontSize: fontSizes.sublight.xl.fontSize,
+      lineHeight: fontSizes.sublight.xl.lineHeight,
+    },
+  },
+  ".fd-kirbytext": {
+    fontSize: fontSizes.subtitle.sm.fontSize,
+    lineHeight: fontSizes.subtitle.sm.lineHeight,
+    fontFamily: fonts.nationalNarrowMedium,
+
+    "@screen md": {
+      fontSize: fontSizes.subtitle.md.fontSize,
+      lineHeight: fontSizes.subtitle.md.lineHeight,
+    },
+
+    h4: {
+      fontSize: "1.5625rem",
+      lineHeight: "2rem",
+      fontWeight: "normal",
+      marginBottom: "0.5rem",
+
+      "@screen md": {
+        fontSize: "3.125rem",
+        lineHeight: "3.875rem",
+        marginBottom: "1rem",
+      },
+
+      a: {
+        textDecoration: "underline",
+      },
+    },
+
+    "p + h4": {
+      marginTop: "0.5rem",
+
+      "@screen md": {
+        marginTop: "1rem",
+      },
     },
   },
 };

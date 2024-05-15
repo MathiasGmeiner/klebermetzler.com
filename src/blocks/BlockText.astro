@@ -4,7 +4,7 @@ const content = block.content;
 const HeadlineLevel = content.headlinelevel || "h2";
 ---
 
-<div>
+<div class="text">
   {
     content.headline && (
       <HeadlineLevel
@@ -15,3 +15,13 @@ const HeadlineLevel = content.headlinelevel || "h2";
   }
   <div class="fd-text" set:html={content.text} />
 </div>
+
+<style>
+  .text + .text {
+    margin-top: 3rem;
+
+    @screen md {
+      margin-top: var(--spacing);
+    }
+  }
+</style>

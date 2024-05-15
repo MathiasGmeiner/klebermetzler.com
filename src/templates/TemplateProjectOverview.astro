@@ -38,7 +38,7 @@ const page: Page = Astro.props.page;
                 alt={item.image.alt}
                 width={item.image.width}
                 height={item.image.height}
-                widths={[320, 400, 480, 560, item.image.widths]}
+                widths={[320, 400, 480, 560, item.image.width]}
                 class="w-full"
               />
               <div class="text-mobile-bu bg-grey-caption inline-flex px-1.5 absolute bottom-0 left-0">{`${item.customer} ${item.projectname}`}</div>

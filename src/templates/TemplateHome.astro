@@ -5,12 +5,12 @@ import { Image } from "astro:assets";
 const page: Page = Astro.props.page;
 ---
 
-<div>
+<swiper-container>
   {
     page.content.slider?.map((item) => {
       const { mobile, desktop } = item.image;
       return (
-        <div class="item">
+        <swiper-slide class="item">
           <div class="image">
             <Image
               src={mobile.src}
@@ -22,23 +22,29 @@ const page: Page = Astro.props.page;
               class="mobile"
             />
             <Image
-              src={mobile.src}
-              alt={mobile.alt}
-              width={mobile.width}
-              height={mobile.height}
+              src={desktop.src}
+              alt={desktop.alt}
+              width={desktop.width}
+              height={desktop.height}
               widths={[800, 1000, 1200, 1400, 1800, 2000, 2400]}
               sizes="100vw"
               class="desktop"
             />
+            {item.caption && (
+              <div class="caption fd-subtitle">{item.caption}</div>
+            )}
           </div>
-          <a class="link" href={item.link.href}>
-            {item.link.title}
-          </a>
-        </div>
+          <a class="link" href={item.link.href} aria-label={item.link.title} />
+        </swiper-slide>
       );
     })
   }
-</div>
+</swiper-container>
+
+<script>
+  import { register } from "swiper/element/bundle";
+  register();
+</script>
 
 <style>
   .item {
@@ -77,6 +83,22 @@ const page: Page = Astro.props.page;
       position: absolute;
       inset: 0;
       pointer-events: auto;
+    }
+  }
+
+  .caption {
+    position: absolute;
+    left: 2.5rem;
+    bottom: 5rem;
+    color: #fff;
+    text-shadow:
+      1px 0 0 var(--color-black),
+      -1px 0 0 var(--color-black),
+      0 1px 0 var(--color-black),
+      0 -1px 0 var(--color-black);
+
+    @screen md {
+      bottom: 1.25rem;
     }
   }
 </style>

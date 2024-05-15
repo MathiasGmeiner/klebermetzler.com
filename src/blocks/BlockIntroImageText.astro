@@ -6,6 +6,17 @@ const content = block.content;
 const HeadlineLevel = content.headlinelevel || "h2";
 
 const sizes = "(min-width: 600px) calc(50vw - 7.5rem), calc(100vw - 2.5rem)";
+
+interface Item {
+  image: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
+  headline: string;
+  text: string;
+}
 ---
 
 <div>
@@ -20,7 +31,7 @@ const sizes = "(min-width: 600px) calc(50vw - 7.5rem), calc(100vw - 2.5rem)";
   <div class="fd-subtitle" set:html={content.text} />
   <div class="list">
     {
-      content.items?.map((item) => (
+      content.items?.map((item: Item) => (
         <div class="item">
           <Image
             src={item.image.src}

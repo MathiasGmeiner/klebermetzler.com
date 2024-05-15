@@ -3,58 +3,59 @@ import type { Page } from "@/types";
 import { Image } from "astro:assets";
 import iconList from "@/images/iconList.svg";
 import iconGrid from "@/images/iconGrid.svg";
-import menu from "@/images/menu.svg";
+import Wrapper from "@components/Wrapper.astro";
 
 const page: Page = Astro.props.page;
 ---
 
-<div class="list-toggle-mobile">
-  <div class="flex justify-between md:gap-x-5 md:justify-start">
-    <button data-trigger-style-list aria-label="Liste">
-      <Image src={iconList} alt="Icon Liste" />
-    </button>
-    <button data-trigger-style-grid arial-label="Raster">
-      <Image src={iconGrid} alt="Icon Raster" />
-    </button>
+<Wrapper>
+  <div class="list-toggle-mobile">
+    <div class="flex justify-between md:gap-x-5 md:justify-start">
+      <button data-trigger-style-list aria-label="Liste">
+        <Image src={iconList} alt="Icon Liste" />
+      </button>
+      <button data-trigger-style-grid arial-label="Raster">
+        <Image src={iconGrid} alt="Icon Raster" />
+      </button>
+    </div>
   </div>
-</div>
-<h1 class="fd-head" set:html={page.content.headline} />
-<ul data-list class="project-list">
-  {
-    page.content.items.map((item) => {
-      if (!item.image) {
-        return null;
-      }
+  <h1 class="fd-head" set:html={page.content.headline} />
+  <ul data-list class="project-list">
+    {
+      page.content.items.map((item) => {
+        if (!item.image) {
+          return null;
+        }
 
-      return (
-        <li>
-          <a href={item.uri}>
-            <div class="image border-2">
-              <Image
-                src={item.image.src}
-                alt={item.image.alt}
-                width={item.image.width}
-                height={item.image.height}
-                widths={[320, 400, 480, 560, item.image.width]}
-                class="w-full"
-              />
-              <div class="text-mobile-bu bg-grey-caption inline-flex px-1.5 absolute bottom-0 left-0">{`${item.customer} ${item.projectname}`}</div>
-            </div>
-            <div class="title">
-              <div class="text-mobile-sub-bold lg:text-sub-bold font-nationalCompressedExtrabold whitespace-nowrap">
-                {item.customer}
+        return (
+          <li>
+            <a href={item.uri}>
+              <div class="image border-2">
+                <Image
+                  src={item.image.src}
+                  alt={item.image.alt}
+                  width={item.image.width}
+                  height={item.image.height}
+                  widths={[320, 400, 480, 560, item.image.width]}
+                  class="w-full"
+                />
+                <div class="text-mobile-bu bg-grey-caption inline-flex px-1.5 absolute bottom-0 left-0">{`${item.customer} ${item.projectname}`}</div>
               </div>
-              <div class="text-mobile-sub-light lg:text-sub-light font-ppeditorialnew whitespace-nowrap">
-                {item.projectname}
+              <div class="title">
+                <div class="text-mobile-sub-bold lg:text-sub-bold font-nationalCompressedExtrabold whitespace-nowrap">
+                  {item.customer}
+                </div>
+                <div class="text-mobile-sub-light lg:text-sub-light font-ppeditorialnew whitespace-nowrap">
+                  {item.projectname}
+                </div>
               </div>
-            </div>
-          </a>
-        </li>
-      );
-    })
-  }
-</ul>
-
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</Wrapper>
 <script>
   document.addEventListener("astro:page-load", () => {
     const triggerStyleList = document.querySelector(

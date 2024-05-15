@@ -3,12 +3,13 @@ import type { Props } from "@/types";
 
 import TemplateDefault from "@templates/TemplateDefault.astro";
 import TemplateFallback from "@templates/TemplateFallback.astro";
+import TemplateHome from "@templates/TemplateHome.astro";
 import TemplateProjectOverview from "@templates/TemplateProjectOverview.astro";
 
 const { page, global } = Astro.props;
 
 const templates = {
-  home: TemplateDefault,
+  home: TemplateHome,
   default: TemplateDefault,
   "project-overview": TemplateProjectOverview,
   error: TemplateDefault,

@@ -68,7 +68,7 @@ const textcolor = page.content.textcolor;
     }
     <ViewTransitions />
   </head>
-  <body class="pt-5 xl:pt-10">
+  <body class:list={[{ "pt-5 xl:pt-10": page.intendedTemplate !== "home" }]}>
     <Header page={page} global={Astro.props.global} preview={preview} />
     <slot />
     <Footer global={Astro.props.global} />

@@ -8,13 +8,12 @@ import menuWork from "@/images/menuWork.svg";
 import menuInfo from "@/images/menuInfo.svg";
 import menuBlog from "@/images/menuBlog.svg";
 import menuJobs from "@/images/menuJobs.svg";
-import menuTagMobile from "@/images/menuTagMobile.svg";
 import menuTagDesktop from "@/images/menuTagDesktop.svg";
 
 const { global, preview } = Astro.props;
 const backgroundcolorMenu = global.backgroundcolorMenu;
 
-const getMenuLink = (uri) => {
+const getMenuLink = (uri: string) => {
   if (preview) {
     return `/preview?slug=${uri.slice(1)}`;
   }

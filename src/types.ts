@@ -50,6 +50,7 @@ type Content = {
   items?: any[];
   prev?: string | null;
   next?: string | null;
+  slider?: any[];
 };
 
 export interface Page {

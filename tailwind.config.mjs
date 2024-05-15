@@ -183,6 +183,7 @@ const fontDefinitions = {
     "@screen xl": {
       fontSize: fontSizes.highlight.xl.fontSize,
       lineHeight: fontSizes.highlight.xl.lineHeight,
+      overflowWrap: "break-word",
     },
   },
   ".fd-head": {

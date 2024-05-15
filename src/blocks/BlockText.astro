@@ -5,9 +5,13 @@ const HeadlineLevel = content.headlinelevel || "h2";
 ---
 
 <div>
-  <HeadlineLevel
-    class="fd-textheadline mb-6 md:mb-8 lg:mb-12 xl:mb-20"
-    set:html={content.headline}
-  />
+  {
+    content.headline && (
+      <HeadlineLevel
+        class="fd-textheadline mb-6 md:mb-8 lg:mb-12 xl:mb-20"
+        set:html={content.headline}
+      />
+    )
+  }
   <div class="fd-text" set:html={content.text} />
 </div>

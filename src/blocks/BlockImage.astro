@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+
+const block = Astro.props;
+const content = block.content;
+
+const sizes =
+  block.layout === "1/1"
+    ? "(min-width: 600px) calc(100vw - 5rem), calc(100vw - 2.5rem)"
+    : "(min-width: 600px) calc(50vw - 7.5rem), calc(100vw - 2.5rem)";
+---
+
+<div class="image">
+  <Image
+    src={content.image.src}
+    alt={content.image.alt}
+    width={content.image.width}
+    height={content.image.height}
+    widths={[
+      320,
+      400,
+      640,
+      800,
+      1000,
+      1200,
+      1400,
+      1600,
+      1800,
+      2200,
+      2400,
+      2600,
+      content.image.width,
+    ]}
+    sizes={sizes}
+  />
+  {
+    content.caption && (
+      <div class="text-mobile-bu md:text-bu bg-grey-caption inline-flex px-1.5 absolute bottom-0 left-0">{`${content.caption}`}</div>
+    )
+  }
+</div>
+
+<style>
+  .image {
+    border: 2px solid var(--color-black);
+    width: 100%;
+    position: relative;
+
+    @screen lg {
+      border-width: 4px;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+</style>

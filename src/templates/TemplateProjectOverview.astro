@@ -45,7 +45,7 @@ const page: Page = Astro.props.page;
                 <div class="text-mobile-sub-bold lg:text-sub-bold font-nationalCompressedExtrabold whitespace-nowrap">
                   {item.customer}
                 </div>
-                <div class="text-mobile-sub-light lg:text-sub-light font-ppeditorialnew whitespace-nowrap">
+                <div class="name text-mobile-sub-light lg:text-sub-light font-ppeditorialnew">
                   {item.projectname}
                 </div>
               </div>
@@ -111,6 +111,14 @@ const page: Page = Astro.props.page;
 
     @screen lg {
       column-gap: 1.5rem;
+    }
+
+    .name {
+      white-space: nowrap;
+
+      @screen lg {
+        line-height: 4.125rem;
+      }
     }
   }
 

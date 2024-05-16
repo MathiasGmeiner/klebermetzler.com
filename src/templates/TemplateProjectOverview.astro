@@ -10,7 +10,7 @@ const page: Page = Astro.props.page;
 
 <Wrapper>
   <div class="list-toggle-mobile">
-    <div class="flex justify-between md:gap-x-5 md:justify-start">
+    <div class="buttons">
       <button data-trigger-style-list aria-label="Liste">
         <Image src={iconList} alt="Icon Liste" />
       </button>
@@ -85,12 +85,24 @@ const page: Page = Astro.props.page;
       display: none;
     }
 
-    > div {
+    .buttons {
       height: 100%;
+      display: flex;
+      justify-content: space-between;
+      aspect-ratio: 163/122;
+
+      @media (min-width: 391px) {
+        aspect-ratio: auto;
+      }
+
+      @media (min-width: 404px) {
+        justify-content: flex-start;
+        column-gap: 1.25rem;
+      }
     }
 
     img {
-      height: 7.125rem;
+      height: 100%;
     }
   }
   .project-list {
@@ -115,6 +127,8 @@ const page: Page = Astro.props.page;
 
     .name {
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
       @screen lg {
         line-height: 4.125rem;

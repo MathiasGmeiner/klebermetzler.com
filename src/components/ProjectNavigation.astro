@@ -10,7 +10,7 @@ const page: Page = Astro.props.page;
     {
       page.content.prev && (
         <a href={page.content.prev} class="item">
-          <div class="text-mobile-copy lg:text-copy text-center">
+          <div class="text-mobile-copy md:text-copy text-center">
             Projekt
             <br />
             davor
@@ -21,7 +21,7 @@ const page: Page = Astro.props.page;
     {
       page.content.next && (
         <a href={page.content.next} class="item">
-          <div class="text-mobile-copy lg:text-copy text-center">
+          <div class="text-mobile-copy md:text-copy text-center">
             nächstes
             <br />
             Projekt
@@ -45,12 +45,12 @@ const page: Page = Astro.props.page;
     aspect-ratio: 1 / 1;
     background-color: var(--color-grey-transparent);
 
-    @screen lg {
+    @screen md {
       border-width: 4px;
-      flex-basis: 228px;
+      flex-basis: 288px;
     }
 
-    @screen xl {
+    @screen lg {
       flex-basis: 328px;
     }
   }

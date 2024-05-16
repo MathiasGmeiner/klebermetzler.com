@@ -1,54 +1,90 @@
 ---
 import type { Page } from "@/types";
 import { Image } from "astro:assets";
+import menuTagMobile from "@/images/menuTagMobile.svg";
+import menuTagDesktop from "@/images/menuTagDesktop.svg";
 
 const page: Page = Astro.props.page;
 ---
 
-<div></div>
-<div class="swiper">
-  <div class="swiper-wrapper">
-    {
-      page.content.slider?.map((item) => {
-        const { mobile, desktop } = item.image;
-        return (
-          <div class="swiper-slide item">
-            <div class="image">
-              <Image
-                src={mobile.src}
-                alt={mobile.alt}
-                width={mobile.width}
-                height={mobile.height}
-                widths={[320, 400, 640, 800, 1000]}
-                sizes="100vw"
-                class="mobile"
+<div>
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      {
+        page.content.slider?.map((item) => {
+          const { mobile, desktop } = item.image;
+          return (
+            <div class="swiper-slide item">
+              <div class="image">
+                <Image
+                  src={mobile.src}
+                  alt={mobile.alt}
+                  width={mobile.width}
+                  height={mobile.height}
+                  widths={[320, 400, 640, 800, 1000]}
+                  sizes="100vw"
+                  class="mobile"
+                />
+                <Image
+                  src={desktop.src}
+                  alt={desktop.alt}
+                  width={desktop.width}
+                  height={desktop.height}
+                  widths={[800, 1000, 1200, 1400, 1800, 2000, 2400]}
+                  sizes="100vw"
+                  class="desktop"
+                />
+                {item.caption && (
+                  <div class="caption fd-subtitle">{item.caption}</div>
+                )}
+              </div>
+              <a
+                class="link"
+                href={item.link.href}
+                aria-label={item.link.title}
               />
-              <Image
-                src={desktop.src}
-                alt={desktop.alt}
-                width={desktop.width}
-                height={desktop.height}
-                widths={[800, 1000, 1200, 1400, 1800, 2000, 2400]}
-                sizes="100vw"
-                class="desktop"
-              />
-              {item.caption && (
-                <div class="caption fd-subtitle">{item.caption}</div>
-              )}
             </div>
-            <a
-              class="link"
-              href={item.link.href}
-              aria-label={item.link.title}
-            />
-          </div>
-        );
-      })
-    }
+          );
+        })
+      }
+    </div>
+    <div class="swiper-button-prev fd-sublight">← zurück</div>
+    <div class="swiper-button-next fd-sublight">weiter →</div>
+    <div class="advertising" data-advertising>
+      <Image
+        src={menuTagMobile}
+        alt="klebermetzler"
+        class="w-full h-full object-fill landscape:hidden"
+      />
+      <Image
+        src={menuTagDesktop}
+        alt="klebermetzler"
+        class="w-full h-full object-fill hidden landscape:block"
+      />
+    </div>
   </div>
-  <div class="swiper-button-prev fd-sublight">← zurück</div>
-  <div class="swiper-button-next fd-sublight">weiter →</div>
+  <button class="button-ads fd-bu" data-button-advertising
+    >(Werbung ausblenden)</button
+  >
 </div>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const toggleAds = document.querySelector("[data-button-advertising]");
+    toggleAds.addEventListener("click", () => {
+      // toggle the class "ads-hidden" on the advertising element
+      const hideAds = document.querySelector("[data-advertising]");
+      hideAds.classList.toggle("ads-hidden");
+
+      // toggle the text content of the button
+      if (hideAds.classList.contains("ads-hidden")) {
+        toggleAds.textContent = "(Werbung einblenden)";
+      } else {
+        toggleAds.textContent = "(Werbung ausblenden)";
+      }
+    });
+  });
+</script>
 
 <script>
   import Swiper from "swiper";
@@ -67,6 +103,19 @@ const page: Page = Astro.props.page;
 </script>
 
 <style>
+  .advertising {
+    position: absolute;
+    inset: 3.5rem 2rem;
+    z-index: 5;
+    pointer-events: none;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+  }
+
   .swiper-button-prev:after,
   .swiper-button-next:after {
     content: "";
@@ -168,5 +217,26 @@ const page: Page = Astro.props.page;
     @screen md {
       bottom: 1.25rem;
     }
+  }
+
+  .button-ads {
+    position: absolute;
+    bottom: 5rem;
+    z-index: 6;
+    right: 2.5rem;
+    color: var(--color-yellow);
+    text-shadow:
+      1px 0 0 var(--color-black-trans),
+      -1px 0 0 var(--color-black-trans),
+      0 1px 0 var(--color-black-trans),
+      0 -1px 0 var(--color-black-trans);
+
+    @screen md {
+      bottom: 1.25rem;
+    }
+  }
+
+  [data-advertising].ads-hidden {
+    display: none;
   }
 </style>

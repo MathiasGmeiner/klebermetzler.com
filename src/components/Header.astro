@@ -161,7 +161,7 @@ const getMenuLink = (uri: string) => {
     bottom: 0;
     padding: 1.25rem;
     pointer-events: none;
-    z-index: 2;
+    z-index: 6;
 
     @screen lg {
       padding: 2.5rem;
@@ -190,6 +190,9 @@ const getMenuLink = (uri: string) => {
 
   .menu-icon {
     pointer-events: auto;
+    position: relative;
+    z-index: 6;
+
     @screen md {
       width: 100%;
     }

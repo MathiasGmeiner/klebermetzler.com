@@ -5,6 +5,7 @@ import { Image } from "astro:assets";
 const page: Page = Astro.props.page;
 ---
 
+<div></div>
 <div class="swiper">
   <div class="swiper-wrapper">
     {
@@ -45,8 +46,8 @@ const page: Page = Astro.props.page;
       })
     }
   </div>
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev fd-sublight">← zurück</div>
+  <div class="swiper-button-next fd-sublight">weiter →</div>
 </div>
 
 <script>
@@ -55,7 +56,7 @@ const page: Page = Astro.props.page;
   import "swiper/css";
   import "swiper/css/navigation";
 
-  const swiper = new Swiper(".swiper", {
+  new Swiper(".swiper", {
     modules: [Navigation],
     loop: true,
     navigation: {
@@ -66,16 +67,54 @@ const page: Page = Astro.props.page;
 </script>
 
 <style>
-  .swiper-button-prev {
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
+    content: "";
+    display: none;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
     position: absolute;
     top: 50%;
-    left: 1rem;
     transform: translateY(-50%);
     z-index: 10;
-    width: 2rem;
-    height: 2rem;
-    background: var(--color-black);
+    white-space: nowrap;
+    width: auto;
+    color: var(--color-white);
+    transition: all 0.2s ease;
+    text-shadow:
+      1px 0 0 var(--color-black),
+      -1px 0 0 var(--color-black),
+      0 1px 0 var(--color-black),
+      0 -1px 0 var(--color-black),
+      2px 2px 8px rgba(0, 0, 0, 0.75);
+
+    &:hover {
+      text-shadow:
+        1px 0 0 var(--color-black),
+        -1px 0 0 var(--color-black),
+        0 1px 0 var(--color-black),
+        0 -1px 0 var(--color-black),
+        2px 2px 2px rgba(0, 0, 0, 0.75);
+    }
   }
+
+  .swiper-button-prev {
+    left: 1rem;
+
+    @screen md {
+      left: 2.5rem;
+    }
+  }
+
+  .swiper-button-next {
+    right: 1rem;
+
+    @screen md {
+      right: 2.5rem;
+    }
+  }
+
   .item {
     width: 100%;
     height: 100vh;

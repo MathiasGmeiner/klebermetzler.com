@@ -8,6 +8,7 @@ import menuWork from "@/images/menuWork.svg";
 import menuInfo from "@/images/menuInfo.svg";
 import menuBlog from "@/images/menuBlog.svg";
 import menuJobs from "@/images/menuJobs.svg";
+import menuTagMobile from "@/images/menuTagMobile.svg";
 import menuTagDesktop from "@/images/menuTagDesktop.svg";
 
 const { global, preview } = Astro.props;
@@ -28,9 +29,14 @@ const getMenuLink = (uri: string) => {
   >
     <a href="/">
       <Image
+        src={menuTagMobile}
+        alt="klebermetzler"
+        class="w-full h-full object-fill landscape:hidden"
+      />
+      <Image
         src={menuTagDesktop}
         alt="klebermetzler"
-        class="w-full h-full object-fill"
+        class="w-full h-full object-fill hidden landscape:block"
       />
     </a>
   </div>

@@ -76,7 +76,7 @@ const getMenuLink = (uri: string) => {
           }
           {
             global.menuBlog && (
-              <li>
+              <li class="md:row-start-3">
                 <a
                   href={getMenuLink(global.menuBlog.href)}
                   aria-label={global.menuBlog.title}
@@ -120,8 +120,8 @@ const getMenuLink = (uri: string) => {
         >
       </div>
     </div>
-    <div class="hidden" data-menu-secondary>
-      <div class="flex flex-col text-mobile-copy">
+    <div class="hidden md:absolute right-0 bottom-0" data-menu-secondary>
+      <div class="flex flex-col fd-text md:text-right">
         {
           global.menuSecondary &&
             global.menuSecondary.map((item) => (

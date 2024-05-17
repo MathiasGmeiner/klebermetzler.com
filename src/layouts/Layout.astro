@@ -133,6 +133,20 @@ const textcolor = page.content.textcolor;
       video {
         width: 100%;
       }
+
+      .image {
+        border: 2px solid var(--color-black);
+        width: 100%;
+        position: relative;
+
+        @screen lg {
+          border-width: 4px;
+        }
+
+        img {
+          width: 100%;
+        }
+      }
     </style>
   </body>
 </html>

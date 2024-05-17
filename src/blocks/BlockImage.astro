@@ -12,10 +12,8 @@ if (!content.image) {
 const ratio = content.image ? content.image.width / content.image.height : 1;
 let sources = [];
 let breakpoints = {
-  "2700px": content.image.width,
   "2200px": 2700,
   "1600px": 2200,
-  "1200px": 1600,
   "900px": 1200,
   "600px": 900,
   "320px": 600,
@@ -23,10 +21,8 @@ let breakpoints = {
 };
 
 let breakpointsHalf = {
-  "2700px": content.image.width / 2,
   "2200px": 1350,
-  "1600px": 1100,
-  "1200px": 800,
+  "1600px": 1200,
   "900px": 600,
   "600px": 340,
   "320px": 600,
@@ -47,7 +43,7 @@ sources = Object.entries(
 <div class="image">
   <CustomPicture
     sources={sources}
-    fallback={{ src: content.image.src, width: 1280, ratio: ratio }}
+    fallback={{ src: content.image.src, width: 1200, ratio: ratio }}
     alt={content.image.alt}
   />
   {
@@ -56,19 +52,3 @@ sources = Object.entries(
     )
   }
 </div>
-
-<style>
-  .image {
-    border: 2px solid var(--color-black);
-    width: 100%;
-    position: relative;
-
-    @screen lg {
-      border-width: 4px;
-    }
-
-    img {
-      width: 100%;
-    }
-  }
-</style>

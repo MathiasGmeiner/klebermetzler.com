@@ -42,12 +42,8 @@ const page: Page = Astro.props.page;
                 <div class="text-mobile-bu bg-grey-caption inline-flex px-1.5 absolute bottom-0 left-0">{`${item.customer} ${item.projectname}`}</div>
               </div>
               <div class="title">
-                <div class="text-mobile-sub-bold lg:text-sub-bold font-nationalCompressedExtrabold whitespace-nowrap">
-                  {item.customer}
-                </div>
-                <div class="name text-mobile-sub-light lg:text-sub-light font-ppeditorialnew">
-                  {item.projectname}
-                </div>
+                <div class="customer">{item.customer}</div>
+                <div class="name">{item.projectname}</div>
               </div>
             </a>
           </li>
@@ -120,18 +116,29 @@ const page: Page = Astro.props.page;
     display: flex;
     column-gap: 0.5rem;
     align-items: flex-end;
+    font-family: theme(fontFamily.nationalCompressedExtrabold);
+    white-space: nowrap;
+    font-size: theme(fontSize.mobile-sub-bold);
+    line-height: theme(fontSize.mobile-sub-bold);
 
-    @screen lg {
+    @screen md {
       column-gap: 1.5rem;
+      font-size: theme(fontSize.sub-bold);
+      line-height: theme(fontSize.sub-bold);
     }
 
     .name {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      line-height: 27px;
+      font-family: theme(fontFamily.ppeditorialnew);
+      font-size: theme(fontSize.mobile-sub-light);
+      line-height: theme(fontSize.mobile-sub-light);
 
-      @screen lg {
-        line-height: 4.125rem;
+      @screen md {
+        font-size: theme(fontSize.sub-light);
+        line-height: 3.375rem;
       }
     }
   }

@@ -4,7 +4,7 @@ const content = block.content;
 const HeadlineLevel = content.headlinelevel || "h2";
 ---
 
-<div class="text">
+<div class:list={["text", { centered: block.layout == "1/2" }]}>
   {
     content.headline && (
       <HeadlineLevel
@@ -17,6 +17,15 @@ const HeadlineLevel = content.headlinelevel || "h2";
 </div>
 
 <style>
+  .centered {
+    @screen md {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+  }
+
   .text + .text {
     margin-top: 3rem;
 

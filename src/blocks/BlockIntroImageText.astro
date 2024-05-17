@@ -1,11 +1,10 @@
 ---
-import { Image } from "astro:assets";
+import CustomPicture from "@components/CustomPicture.astro";
 
 const block = Astro.props;
+const isFirstLayout = Astro.props;
 const content = block.content;
 const HeadlineLevel = content.headlinelevel || "h2";
-
-const sizes = "(min-width: 600px) calc(50vw - 7.5rem), calc(100vw - 2.5rem)";
 
 interface Item {
   image: {
@@ -31,22 +30,40 @@ interface Item {
   <div class="fd-subtitle" set:html={content.text} />
   <div class="list">
     {
-      content.items?.map((item: Item) => (
-        <div class="item">
-          <Image
-            src={item.image.src}
-            alt={item.image.alt}
-            width={item.image.width}
-            height={item.image.height}
-            widths={[380, 640, 900, 1100, 1400]}
-            sizes={sizes}
-          />
-          <div>
-            <h3 class="fd-sublight" set:html={item.headline} />
-            <div class="fd-kirbytext" set:html={item.text} />
+      content.items?.map((item: Item) => {
+        const ratio = item.image ? item.image.width / item.image.height : 1;
+        let sources = [];
+        let breakpoints = {
+          "2200px": 1350,
+          "1200px": 800,
+          "900px": 600,
+          "600px": 340,
+          "320px": 600,
+          "0px": 320,
+        };
+        sources = Object.entries(breakpoints).map(([breakpoint, width]) => ({
+          breakpoint,
+          image: item.image,
+          ratio: ratio,
+          width,
+          lazy: !isFirstLayout,
+        }));
+        return (
+          <div class="item">
+            <div class="image">
+              <CustomPicture
+                sources={sources}
+                fallback={{ src: item.image.src, width: 1200, ratio: ratio }}
+                alt={item.image.alt}
+              />
+            </div>
+            <div>
+              <h3 class="fd-sublight" set:html={item.headline} />
+              <div class="fd-kirbytext" set:html={item.text} />
+            </div>
           </div>
-        </div>
-      ))
+        );
+      })
     }
   </div>
 </div>

@@ -1,10 +1,19 @@
 ---
 const block = Astro.props;
 const content = block.content;
+
+// map text styles to content.style
+const textStyles = {
+  headlight: "fd-headlight",
+  headbold: "fd-headbold",
+  subbold: "fd-subbold",
+  sublight: "fd-headlight",
+  copy: "fd-copy",
+};
 ---
 
 <div class:list={["text", { centered: block.layout == "1/2" }]}>
-  <div class:list={[`fd-${content.style}`]} set:html={content.text} />
+  <div class={textStyles[content.style]} set:html={content.text} />
 </div>
 
 <style>

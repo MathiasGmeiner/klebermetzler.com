@@ -3,11 +3,26 @@ import type { Page } from "@/types";
 import { Image } from "astro:assets";
 import menuTagMobile from "@/images/menuTagMobile.svg";
 import menuTagDesktop from "@/images/menuTagDesktop.svg";
+import iconClose from "@/images/iconClose.svg";
 
 const page: Page = Astro.props.page;
 ---
 
 <div>
+  {
+    page.content.overlay && (
+      <div class="overlay-wrapper">
+        <div class="overlay-content-wrapper">
+          <button data-overlay-close class="button" arial-label="Close Overlay">
+            <Image src={iconClose} alt="Close Overlay" />
+          </button>
+          <div class="overlay-content">
+            <div set:html={page.content.overlay.text} />
+          </div>
+        </div>
+      </div>
+    )
+  }
   <div class="swiper">
     <div class="swiper-wrapper">
       {
@@ -81,6 +96,13 @@ const page: Page = Astro.props.page;
         toggleAds.textContent = "(Werbung ausblenden)";
       }
     });
+
+    const closeOverlay = document.querySelectorAll("[data-overlay-close]");
+    closeOverlay.forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelector(".overlay-wrapper").remove();
+      });
+    });
   });
 </script>
 
@@ -100,7 +122,101 @@ const page: Page = Astro.props.page;
   });
 </script>
 
+<style is:global>
+  .overlay-content {
+    h1,
+    h2,
+    p {
+      display: inline;
+    }
+    h1 {
+      color: var(--color-red);
+      font-family: theme(fontFamily.nationalCompressedExtrabold);
+      font-weight: normal;
+      font-size: clamp(2.5rem, 10vw, 9.9375rem);
+      line-height: 0.85;
+      text-transform: uppercase;
+
+      @md {
+        line-height: 0.91;
+      }
+    }
+
+    h2 {
+      color: var(--color-black);
+      font-family: theme(fontFamily.ppeditorialnew);
+      font-weight: normal;
+      font-size: clamp(1.9375rem, 8.08vw, 7.1875rem);
+      line-height: 1.1;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+</style>
+
 <style>
+  .overlay-wrapper {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .overlay-content-wrapper {
+    width: 90vw;
+    min-height: 50vh;
+    max-height: 80vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .button {
+      width: 1.5625rem;
+      height: 1.5625rem;
+      border: 2px solid var(--color-black);
+      background-color: var(--color-white);
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+
+      @screen md {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-width: 4px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+      }
+    }
+  }
+
+  .overlay-content {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: var(--color-black);
+    border: 2px solid var(--color-black);
+    padding: 0.25rem;
+    min-height: calc(50vh - 2rem);
+    width: calc(100% - 2rem);
+    height: calc(100% - 2rem);
+
+    @screen md {
+      border-width: 4px;
+      padding: 0.5rem;
+    }
+
+    @screen lg {
+      padding: 2rem;
+    }
+  }
+
   .advertising {
     position: absolute;
     inset: 3.5rem 2rem;

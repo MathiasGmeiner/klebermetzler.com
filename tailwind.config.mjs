@@ -254,7 +254,7 @@ const fontDefinitions = {
   },
   ".fd-headlight": {
     fontSize: fontSizes.headlight.sm.fontSize,
-    fontFamily: fonts.editorialnew,
+    fontFamily: fonts.ppeditorialnew,
     lineHeight: fontSizes.headlight.sm.lineHeight,
 
     "@screen md": {
@@ -267,7 +267,7 @@ const fontDefinitions = {
     },
 
     "@screen xl": {
-      fontSize: fontSizes.headbold.xl.fontSize,
+      fontSize: fontSizes.headlight.xl.fontSize,
       lineHeight: fontSizes.headlight.xl.lineHeight,
       lineHeight: fontSizes.headlight.xl.lineHeight,
     },

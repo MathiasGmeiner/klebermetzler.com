@@ -51,6 +51,10 @@ type Content = {
   prev?: string | null;
   next?: string | null;
   slider?: any[];
+  overlay: {
+    text: string;
+    link: Link;
+  } | null;
 };
 
 export interface Page {

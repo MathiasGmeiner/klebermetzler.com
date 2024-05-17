@@ -50,12 +50,14 @@ interface Item {
         }));
         return (
           <div class="item">
-            <div class="image">
-              <CustomPicture
-                sources={sources}
-                fallback={{ src: item.image.src, width: 1200, ratio: ratio }}
-                alt={item.image.alt}
-              />
+            <div>
+              <div class="image">
+                <CustomPicture
+                  sources={sources}
+                  fallback={{ src: item.image.src, width: 1200, ratio: ratio }}
+                  alt={item.image.alt}
+                />
+              </div>
             </div>
             <div>
               <h3 class="fd-sublight" set:html={item.headline} />

@@ -1,0 +1,52 @@
+---
+import { getImage } from "astro:assets";
+const { fallback, alt, sources } = Astro.props;
+
+const fallbackImage = await getImage({
+  src: fallback.src,
+  format: "webp",
+  width: fallback.width,
+  height: fallback.width * fallback.ratio,
+});
+
+let sourceImages = [];
+for (const source of sources) {
+  const { breakpoint, image, ratio, width } = source;
+  const height = width * ratio;
+
+  const x1 = await getImage({
+    src: image.src,
+    format: "webp",
+    width: width,
+    height: height,
+  });
+  const x2 = await getImage({
+    src: image.src,
+    format: "webp",
+    width: width * 2,
+    height: height * 2,
+  });
+  sourceImages.push({ breakpoint: breakpoint, "1x": x1.src, "2x": x2.src });
+}
+---
+
+<picture>
+  {
+    sourceImages.map((source) => {
+      return (
+        <source
+          media={`(min-width: ${source.breakpoint})`}
+          srcset={`${source["1x"]} 1x, ${source["2x"]} 2x`}
+        />
+      );
+    })
+  }
+  <img
+    loading="lazy"
+    src={fallbackImage.src}
+    width={fallbackImage.attributes.width}
+    height={fallbackImage.attributes.height}
+    class="w-full h-auto"
+    alt={alt}
+  />
+</picture>

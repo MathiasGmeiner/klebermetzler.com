@@ -7,18 +7,26 @@ const page: Page = Astro.props.page;
 
 <div class="layout">
   {
-    page.content.layout?.map((layout) => {
+    page.content.layout?.map((layout, index) => {
       if (layout.width === "1/1") {
         return (
           <div class="md:col-span-2">
-            <Blocks layout={layout.width} blocks={layout.blocks} />
+            <Blocks
+              layout={layout.width}
+              isFirstLayout={index === 0}
+              blocks={layout.blocks}
+            />
           </div>
         );
       }
 
       return (
         <div class="md:col-span-1">
-          <Blocks layout={layout.width} blocks={layout.blocks} />
+          <Blocks
+            layout={layout.width}
+            isFirstLayout={index === 0}
+            blocks={layout.blocks}
+          />
         </div>
       );
     })

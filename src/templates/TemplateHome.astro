@@ -71,12 +71,10 @@ const page: Page = Astro.props.page;
 <script>
   document.addEventListener("astro:page-load", () => {
     const toggleAds = document.querySelector("[data-button-advertising]");
-    toggleAds.addEventListener("click", () => {
-      // toggle the class "ads-hidden" on the advertising element
+    toggleAds?.addEventListener("click", () => {
       const hideAds = document.querySelector("[data-advertising]");
       hideAds.classList.toggle("ads-hidden");
 
-      // toggle the text content of the button
       if (hideAds.classList.contains("ads-hidden")) {
         toggleAds.textContent = "(Werbung einblenden)";
       } else {

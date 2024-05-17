@@ -7,6 +7,7 @@ import BlockVideo from "@blocks/BlockVideo.astro";
 import BlockImage from "@blocks/BlockImage.astro";
 import BlockIntroImageText from "@blocks/BlockIntroImageText.astro";
 const layout: Layout = Astro.props.layout;
+const isFirstLayout: boolean = Astro.props.isFirstLayout;
 const items: BlockType[] = Astro.props.blocks;
 
 const blocks = {
@@ -21,6 +22,6 @@ const blocks = {
 {
   items?.map((block) => {
     const Block = blocks[block.type] || BlockFallback;
-    return <Block {...block} layout={layout} />;
+    return <Block {...block} layout={layout} isFirstLayout={isFirstLayout} />;
   })
 }

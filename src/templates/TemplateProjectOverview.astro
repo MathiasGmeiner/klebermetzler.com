@@ -19,7 +19,7 @@ const page: Page = Astro.props.page;
       </button>
     </div>
   </div>
-  <h1 class="fd-head" set:html={page.content.headline} />
+  <h1 class="fd-headbold" set:html={page.content.headline} />
   <ul data-list class="project-list">
     {
       page.content.items.map((item) => {

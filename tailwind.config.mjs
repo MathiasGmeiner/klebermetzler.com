@@ -1,6 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require("tailwindcss/plugin");
 
+function ptr(px) {
+  return `${px / 16}rem`;
+}
+
+function pxToRem(px) {
+  return ptr(px);
+}
+
 const screens = {
   md: "600px",
   lg: "1500px",
@@ -33,22 +41,72 @@ const fontSizes = {
       lineHeight: "12.1875rem",
     },
   },
-  head: {
+  headbold: {
     sm: {
-      fontSize: "2.5rem",
+      fontSize: ptr(40),
+      lineHeight: 0.85,
+    },
+    md: {
+      fontSize: "clamp(2.5rem, 10vw, 8rem)",
+    },
+    lg: {
+      fontSize: "clamp(8rem, 10vw, 9.9375rem)",
+    },
+    xl: {
+      fontSize: "clamp(13.4375rem, 10.5vw, 17.5rem)",
+    },
+  },
+  headlight: {
+    sm: {
+      fontSize: ptr(31),
+      lineHeight: 1.09,
+    },
+    md: {
+      fontSize: "clamp(1.9375rem, 6vw, 5.625rem)",
+      lineHeight: 1.22,
+    },
+    lg: {
+      fontSize: "clamp(5.625rem, 5.9vw, 7.1875rem)",
+    },
+    xl: {
+      fontSize: "clamp(7.1875rem, 10.5vw, 9.6875rem)",
+      lineHeight: 1.19,
+    },
+  },
+  subbold: {
+    sm: {
+      fontSize: ptr(30),
       lineHeight: 0.9,
     },
     md: {
-      fontSize: "clamp(3rem, 10vw, 9.6875rem)",
-      lineHeight: 0.8,
+      fontSize: "clamp(1.875rem, 4.7vw, 4.375rem)",
+      lineHeight: 0.85,
     },
     lg: {
-      fontSize: "clamp(10rem, 11vw, 13.75rem)",
-      lineHeight: 0.8,
+      fontSize: "clamp(4.375rem, 6vw, 5.625rem)",
+      lineHeight: 0.94,
     },
     xl: {
-      fontSize: "clamp(12rem, 10.5vw, 17.5rem)",
-      lineHeight: 0.8,
+      fontSize: "clamp(5.625rem, 6.25vw, 7.5rem)",
+      lineHeight: 0.92,
+    },
+  },
+  sublight: {
+    sm: {
+      fontSize: ptr(23),
+      lineHeight: 1.17,
+    },
+    md: {
+      fontSize: "clamp(1.4375rem, 3.3vw, 3.6875rem)",
+      lineHeight: 1.01,
+    },
+    lg: {
+      fontSize: "clamp(3.6875rem, 3.9vw, 4.6875rem)",
+      lineHeight: 1.13,
+    },
+    xl: {
+      fontSize: "clamp(4.6875rem, 3.9vw, 6.25rem)",
+      lineHeight: 1.1,
     },
   },
   subtitle: {
@@ -84,33 +142,16 @@ const fontSizes = {
   copy: {
     sm: {
       fontSize: "1.25rem",
-      lineHeight: "1.625rem",
+      lineHeight: 1.3,
     },
     md: {
-      fontSize: "1.5rem",
-      lineHeight: "1.875rem",
+      fontSize: "clamp(1.5rem, 2.4vw, 2.3125rem)",
     },
     lg: {
-      fontSize: "3.125rem",
-      lineHeight: "3.875rem",
+      fontSize: "clamp(2.3125rem, 2.6vw, 3.125rem)",
     },
     xl: {
-      fontSize: "4.6875rem",
-      lineHeight: "5.625rem",
-    },
-  },
-  sublight: {
-    sm: {
-      fontSize: "1.5625rem",
-      lineHeight: "2rem",
-    },
-    lg: {
-      fontSize: "3.125rem",
-      lineHeight: "3.875rem",
-    },
-    xl: {
-      fontSize: "4.6875rem",
-      lineHeight: "5.625rem",
+      fontSize: "clamp(3.125rem, 2.6vw, 4.125rem)",
     },
   },
 };
@@ -138,8 +179,8 @@ export default {
         { lineHeight: fontSizes.copy.sm.lineHeight },
       ],
       "mobile-head": [
-        fontSizes.head.sm.fontSize,
-        { lineHeight: fontSizes.head.sm.lineHeight },
+        fontSizes.headbold.sm.fontSize,
+        { lineHeight: fontSizes.headbold.sm.lineHeight },
       ],
       copy: [
         fontSizes.copy.lg.fontSize,
@@ -153,8 +194,8 @@ export default {
         },
       ],
       head: [
-        fontSizes.head.lg.fontSize,
-        { lineHeight: fontSizes.head.lg.lineHeight },
+        fontSizes.headbold.lg.fontSize,
+        { lineHeight: fontSizes.headbold.lg.lineHeight },
       ],
       "sub-bold": [
         fontSizes.textHeadline.lg.fontSize,
@@ -200,25 +241,84 @@ const fontDefinitions = {
       overflowWrap: "break-word",
     },
   },
-  ".fd-head": {
-    fontSize: fontSizes.head.sm.fontSize,
-    lineHeight: fontSizes.head.sm.lineHeight,
+  ".fd-headbold": {
+    fontSize: fontSizes.headbold.sm.fontSize,
+    fontFamily: fonts.nationalCompressedExtrabold,
+    lineHeight: fontSizes.headbold.sm.lineHeight,
+    textTransform: "uppercase",
+
+    "@screen md": {
+      fontSize: fontSizes.headbold.md.fontSize,
+    },
+
+    "@screen lg": {
+      fontSize: fontSizes.headbold.lg.fontSize,
+    },
+
+    "@screen xl": {
+      fontSize: fontSizes.headbold.xl.fontSize,
+      lineHeight: fontSizes.headbold.xl.lineHeight,
+    },
+  },
+  ".fd-headlight": {
+    fontSize: fontSizes.headlight.sm.fontSize,
+    fontFamily: fonts.editorialnew,
+    lineHeight: fontSizes.headlight.sm.lineHeight,
+
+    "@screen md": {
+      fontSize: fontSizes.headlight.md.fontSize,
+      lineHeight: fontSizes.headlight.md.lineHeight,
+    },
+
+    "@screen lg": {
+      fontSize: fontSizes.headlight.lg.fontSize,
+    },
+
+    "@screen xl": {
+      fontSize: fontSizes.headbold.xl.fontSize,
+      lineHeight: fontSizes.headlight.xl.lineHeight,
+      lineHeight: fontSizes.headlight.xl.lineHeight,
+    },
+  },
+  ".fd-subbold": {
+    fontSize: fontSizes.subbold.sm.fontSize,
+    lineHeight: fontSizes.subbold.sm.lineHeight,
     fontFamily: fonts.nationalCompressedExtrabold,
     textTransform: "uppercase",
 
     "@screen md": {
-      fontSize: fontSizes.head.md.fontSize,
-      lineHeight: fontSizes.head.md.lineHeight,
+      fontSize: fontSizes.subbold.md.fontSize,
+      lineHeight: fontSizes.subbold.md.lineHeight,
     },
 
     "@screen lg": {
-      fontSize: fontSizes.head.lg.fontSize,
-      lineHeight: fontSizes.head.lg.lineHeight,
+      fontSize: fontSizes.subbold.lg.fontSize,
+      lineHeight: fontSizes.subbold.lg.lineHeight,
     },
 
     "@screen xl": {
-      fontSize: fontSizes.head.xl.fontSize,
-      lineHeight: fontSizes.head.xl.lineHeight,
+      fontSize: fontSizes.subbold.xl.fontSize,
+      lineHeight: fontSizes.subbold.xl.lineHeight,
+    },
+  },
+  ".fd-sublight": {
+    fontSize: fontSizes.sublight.sm.fontSize,
+    lineHeight: fontSizes.sublight.sm.lineHeight,
+    fontFamily: fonts.ppeditorialnew,
+
+    "@screen md": {
+      fontSize: fontSizes.sublight.md.fontSize,
+      lineHeight: fontSizes.sublight.md.lineHeight,
+    },
+
+    "@screen lg": {
+      fontSize: fontSizes.sublight.lg.fontSize,
+      lineHeight: fontSizes.sublight.lg.lineHeight,
+    },
+
+    "@screen xl": {
+      fontSize: fontSizes.sublight.xl.fontSize,
+      lineHeight: fontSizes.sublight.xl.lineHeight,
     },
   },
   ".fd-subtitle": {
@@ -256,39 +356,21 @@ const fontDefinitions = {
       letterSpacing: fontSizes.textHeadline.xl.letterSpacing,
     },
   },
-  ".fd-text": {
+  ".fd-copy": {
     fontSize: fontSizes.copy.sm.fontSize,
     lineHeight: fontSizes.copy.sm.lineHeight,
     fontFamily: fonts.nationalNarrowMedium,
 
     "@screen md": {
       fontSize: fontSizes.copy.md.fontSize,
-      lineHeight: fontSizes.copy.md.lineHeight,
     },
 
     "@screen lg": {
       fontSize: fontSizes.copy.lg.fontSize,
-      lineHeight: fontSizes.copy.lg.lineHeight,
     },
 
     "@screen xl": {
       fontSize: fontSizes.copy.xl.fontSize,
-      lineHeight: fontSizes.copy.xl.lineHeight,
-    },
-  },
-  ".fd-sublight": {
-    fontSize: fontSizes.sublight.sm.fontSize,
-    lineHeight: fontSizes.sublight.sm.lineHeight,
-    fontFamily: fonts.ppeditorialnew,
-
-    "@screen lg": {
-      fontSize: fontSizes.sublight.lg.fontSize,
-      lineHeight: fontSizes.sublight.lg.lineHeight,
-    },
-
-    "@screen xl": {
-      fontSize: fontSizes.sublight.xl.fontSize,
-      lineHeight: fontSizes.sublight.xl.lineHeight,
     },
   },
   ".fd-kirbytext": {

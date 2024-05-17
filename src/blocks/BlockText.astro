@@ -1,19 +1,10 @@
 ---
 const block = Astro.props;
 const content = block.content;
-const HeadlineLevel = content.headlinelevel || "h2";
 ---
 
 <div class:list={["text", { centered: block.layout == "1/2" }]}>
-  {
-    content.headline && (
-      <HeadlineLevel
-        class="fd-textheadline mb-6 md:mb-8 lg:mb-12 xl:mb-20"
-        set:html={content.headline}
-      />
-    )
-  }
-  <div class="fd-text" set:html={content.text} />
+  <div class:list={[`fd-${content.style}`]} set:html={content.text} />
 </div>
 
 <style>

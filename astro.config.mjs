@@ -12,9 +12,12 @@ export default defineConfig({
     }),
     sitemap(),
   ],
-  output: "hybrid",
+  output: "server",
   adapter: vercel({
     imageService: true,
+    isr: {
+      expiration: 60,
+    },
   }),
   image: {
     domains: ["cms.klebermetzler.com", "cms.klebermetzler.test"],

@@ -169,10 +169,6 @@ export default {
           letterSpacing: fontSizes.subtitle.sm.letterSpacing,
         },
       ],
-      "mobile-sub-bold": [
-        fontSizes.textHeadline.sm.fontSize,
-        { lineHeight: fontSizes.textHeadline.sm.lineHeight },
-      ],
       "mobile-sub-light": ["1.5625rem", { lineHeight: 1 }],
       "mobile-copy": [
         fontSizes.copy.sm.fontSize,
@@ -196,10 +192,6 @@ export default {
       head: [
         fontSizes.headbold.lg.fontSize,
         { lineHeight: fontSizes.headbold.lg.lineHeight },
-      ],
-      "sub-bold": [
-        fontSizes.textHeadline.lg.fontSize,
-        { lineHeight: fontSizes.textHeadline.lg.lineHeight },
       ],
       "sub-light": [fontSizes.sublight.lg.fontSize, { lineHeight: 1 }],
     },

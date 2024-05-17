@@ -116,15 +116,28 @@ const page: Page = Astro.props.page;
     display: flex;
     column-gap: 0.5rem;
     align-items: flex-end;
-    font-family: theme(fontFamily.nationalCompressedExtrabold);
-    white-space: nowrap;
-    font-size: theme(fontSize.mobile-sub-bold);
-    line-height: 2.125rem;
 
     @screen md {
       column-gap: 1.5rem;
-      font-size: theme(fontSize.sub-bold);
-      line-height: 4.9375rem;
+    }
+
+    .customer {
+      font-family: theme(fontFamily.nationalCompressedExtrabold);
+      white-space: nowrap;
+      font-size: 1.875rem;
+      line-height: 2.125rem;
+      text-transform: uppercase;
+
+      @screen md {
+        column-gap: 1.5rem;
+        font-size: 50px;
+        line-height: 60px;
+      }
+
+      @screen lg {
+        font-size: 5.625rem;
+        line-height: 6.375rem;
+      }
     }
 
     .name {
@@ -133,12 +146,17 @@ const page: Page = Astro.props.page;
       text-overflow: ellipsis;
       line-height: 27px;
       font-family: theme(fontFamily.ppeditorialnew);
-      font-size: theme(fontSize.mobile-sub-light);
+      font-size: 1.5625rem;
       line-height: 1.6875rem;
 
       @screen md {
-        font-size: theme(fontSize.sub-light);
-        line-height: 3.375rem;
+        font-size: 2.875rem;
+        line-height: 3.1875rem;
+      }
+
+      @screen lg {
+        font-size: 4.75rem;
+        line-height: 5.1875rem;
       }
     }
   }

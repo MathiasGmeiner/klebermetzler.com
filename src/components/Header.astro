@@ -43,7 +43,7 @@ const getMenuLink = (uri: string) => {
   <div
     class="flex flex-col justify-between h-full relative pointer-events-none"
   >
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-x-5 md:gap-x-[2.75rem]">
+    <div class="menuItemsWrapper">
       <nav class="hidden" data-nav>
         <ul
           class="flex flex-col md:grid md:grid-cols-2 md:w-full gap-y-5 md:gap-x-[2.75rem] pointer-events-auto"
@@ -201,6 +201,17 @@ const getMenuLink = (uri: string) => {
         height: auto;
         width: 100%;
       }
+    }
+  }
+
+  .menuItemsWrapper {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.25rem;
+
+    @screen md {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: 2.75rem;
     }
   }
 </style>

@@ -14,7 +14,7 @@ export default defineConfig({
   ],
   output: "hybrid",
   adapter: vercel({
-    //imageService: true,
+    imageService: true,
   }),
   image: {
     domains: ["cms.klebermetzler.com", "cms.klebermetzler.test"],

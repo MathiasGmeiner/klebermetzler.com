@@ -1,12 +1,12 @@
 ---
 import { getImage } from "astro:assets";
-const { fallback, alt, sources } = Astro.props;
+const { fallback, alt, sources, lazy } = Astro.props;
 
 const fallbackImage = await getImage({
   src: fallback.src,
   format: "webp",
   width: fallback.width,
-  height: fallback.width * fallback.ratio,
+  height: fallback.width / fallback.ratio,
 });
 
 let sourceImages = [];
@@ -42,7 +42,7 @@ for (const source of sources) {
     })
   }
   <img
-    loading="lazy"
+    loading={lazy ? "lazy" : "eager"}
     src={fallbackImage.src}
     width={fallbackImage.attributes.width}
     height={fallbackImage.attributes.height}

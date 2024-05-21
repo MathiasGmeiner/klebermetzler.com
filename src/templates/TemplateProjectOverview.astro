@@ -5,6 +5,7 @@ import iconList from "@/images/iconList.svg";
 import iconGrid from "@/images/iconGrid.svg";
 import Wrapper from "@components/Wrapper.astro";
 import iconClose from "@/images/iconClose.svg";
+import CustomPicture from "@components/CustomPicture.astro";
 
 const page: Page = Astro.props.page;
 ---
@@ -47,6 +48,21 @@ const page: Page = Astro.props.page;
             return null;
           }
 
+          const ratio = item.image ? item.image.width / item.image.height : 1;
+          let sources = [];
+          let breakpoints = {
+            "2200px": 900,
+            "1600px": 600,
+            "900px": 400,
+            "0px": 600,
+          };
+          sources = Object.entries(breakpoints).map(([breakpoint, width]) => ({
+            breakpoint,
+            image: item.image,
+            ratio: ratio,
+            width,
+          }));
+
           return (
             <>
               {index === 3 && (
@@ -62,15 +78,17 @@ const page: Page = Astro.props.page;
               <li>
                 <a href={item.uri}>
                   <div class="image border-2">
-                    <Image
-                      src={item.image.src}
+                    <CustomPicture
+                      sources={sources}
+                      fallback={{
+                        src: item.image.src,
+                        width: 1200,
+                        ratio: ratio,
+                      }}
                       alt={item.image.alt}
-                      width={item.image.width}
-                      height={item.image.height}
-                      widths={[400, 560, 1000]}
-                      class="w-full"
+                      lazy={index > 3}
                     />
-                    <div class="text-mobile-bu bg-grey-caption inline-flex px-1.5 absolute bottom-0 left-0">{`${item.customer} ${item.projectname}`}</div>
+                    <div class="text-mobile-bu bg-grey-caption inline-flex px-1.5 absolute bottom-0 left-0">{`${item.customer} - ${item.projectname}`}</div>
                   </div>
                   <div class="title">
                     <div class="customer">{item.customer}</div>

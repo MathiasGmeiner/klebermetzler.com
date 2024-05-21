@@ -14,7 +14,7 @@ export default defineConfig({
   ],
   output: "server",
   adapter: vercel({
-    imageService: true,
+    //imageService: true,
     isr: {
       expiration: 60 * 60 * 24,
     },

@@ -50,10 +50,10 @@ const fontSizes = {
       fontSize: "clamp(2.5rem, 10vw, 8rem)",
     },
     lg: {
-      fontSize: "clamp(8rem, 10vw, 9.9375rem)",
+      fontSize: "clamp(8rem, 10.7vw, 204px)",
     },
     xl: {
-      fontSize: "clamp(13.4375rem, 10.5vw, 17.5rem)",
+      fontSize: "clamp(190px, 10.15vw, 320px)",
     },
   },
   headlight: {
@@ -249,7 +249,6 @@ const fontDefinitions = {
 
     "@screen xl": {
       fontSize: fontSizes.headbold.xl.fontSize,
-      lineHeight: fontSizes.headbold.xl.lineHeight,
     },
   },
   ".fd-headlight": {

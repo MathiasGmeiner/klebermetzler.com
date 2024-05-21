@@ -54,6 +54,7 @@ type Content = {
   overlay: {
     text: string;
     link: Link;
+    button?: string;
   } | null;
 };
 

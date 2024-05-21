@@ -116,6 +116,7 @@ const textcolor = page.content.textcolor;
         --color-black: #000;
         --color-black-trans: rgba(0, 0, 0, 0.25);
         --color-white: #fff;
+        --color-white-transparent: rgba(255, 255, 255, 0.58);
         --color-red: #ff1a36;
         --color-yellow: rgba(255, 237, 0, 0.5);
         --color-grey-transparent: rgba(217, 217, 217, 0.5);
@@ -148,6 +149,70 @@ const textcolor = page.content.textcolor;
 
         img {
           width: 100%;
+        }
+      }
+
+      .overlay-wrapper {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+      }
+
+      .overlay-hidden {
+        display: none;
+      }
+
+      .overlay-content-wrapper {
+        width: 90vw;
+        min-height: 50vh;
+        max-height: 80vh;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .button {
+          width: 1.5625rem;
+          height: 1.5625rem;
+          border: 2px solid var(--color-black);
+          background-color: var(--color-white);
+          position: absolute;
+          top: 0.5rem;
+          right: 0.5rem;
+
+          @screen md {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-width: 4px;
+          }
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+          }
+        }
+      }
+
+      .overlay-content {
+        background-color: var(--color-white-transparent);
+        color: var(--color-black);
+        border: 2px solid var(--color-black);
+        padding: 0.25rem;
+        min-height: calc(50vh - 2rem);
+        width: calc(100% - 2rem);
+        height: calc(100% - 2rem);
+
+        @screen md {
+          border-width: 4px;
+          padding: 0.5rem;
+        }
+
+        @screen lg {
+          padding: 2rem;
         }
       }
     </style>

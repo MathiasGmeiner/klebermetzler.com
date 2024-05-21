@@ -4,10 +4,25 @@ import { Image } from "astro:assets";
 import iconList from "@/images/iconList.svg";
 import iconGrid from "@/images/iconGrid.svg";
 import Wrapper from "@components/Wrapper.astro";
+import iconClose from "@/images/iconClose.svg";
 
 const page: Page = Astro.props.page;
 ---
 
+{
+  page.content.overlay && (
+    <div class="overlay-wrapper overlay-hidden">
+      <div class="overlay-content-wrapper">
+        <button data-overlay-close class="button" arial-label="Close Overlay">
+          <Image src={iconClose} alt="Close Overlay" />
+        </button>
+        <div class="overlay-content">
+          <div set:html={page.content.overlay.text} />
+        </div>
+      </div>
+    </div>
+  )
+}
 <Wrapper>
   <div class="relative">
     <div class="list-toggle-mobile">
@@ -20,7 +35,7 @@ const page: Page = Astro.props.page;
         </button>
       </div>
     </div>
-    <h1 class="fd-headbold md:absolute" set:html={page.content.headline} />
+    <h1 class="fd-headbold headline" set:html={page.content.headline} />
     <ul data-list class="project-list grid">
       <li class="placeholder"></li>
       <li class="placeholder"></li>
@@ -55,6 +70,19 @@ const page: Page = Astro.props.page;
           );
         })
       }
+      {
+        page.content.overlay && (
+          <li class="add-project-wrapper" data-overlay-open>
+            <div class="add-project">
+              <span class="fd-subbold">+</span>
+              <div
+                class="fd-sublight md:fd-copy pt-0.5"
+                set:html={page.content.overlay.button}
+              />
+            </div>
+          </li>
+        )
+      }
     </ul>
   </div>
 </Wrapper>
@@ -72,10 +100,39 @@ const page: Page = Astro.props.page;
     triggerStyleGrid?.addEventListener("click", () => {
       document.querySelector("[data-list]").classList.add("grid");
     });
+
+    const openOverlay = document.querySelectorAll("[data-overlay-open]");
+    openOverlay.forEach((button) => {
+      button.addEventListener("click", () => {
+        document
+          .querySelector(".overlay-wrapper")
+          .classList.remove("overlay-hidden");
+      });
+    });
+
+    const closeOverlay = document.querySelectorAll("[data-overlay-close]");
+    closeOverlay.forEach((button) => {
+      button.addEventListener("click", () => {
+        document
+          .querySelector(".overlay-wrapper")
+          .classList.add("overlay-hidden");
+      });
+    });
   });
 </script>
 
 <style>
+  .headline {
+    @screen md {
+      margin-bottom: 2rem;
+    }
+  }
+  .headline:has(+ .grid) {
+    @screen md {
+      position: absolute;
+      margin-bottom: 0;
+    }
+  }
   .list-toggle-mobile {
     margin-bottom: 2rem;
     width: 100%;
@@ -119,6 +176,10 @@ const page: Page = Astro.props.page;
   }
 
   .placeholder {
+    display: none;
+  }
+
+  .grid .placeholder {
     display: none;
 
     @screen md {
@@ -208,8 +269,45 @@ const page: Page = Astro.props.page;
       }
     }
   }
-
   .grid .title {
     display: none;
+  }
+
+  .add-project {
+    display: inline-flex;
+    column-gap: 0.25rem;
+    background-color: var(--color-white-transparent);
+    border: 2px solid var(--color-black);
+    padding: 0.25rem 1rem 0.175rem 1rem;
+    cursor: pointer;
+
+    @screen md {
+      column-gap: 1rem;
+    }
+
+    @screen lg {
+      border-width: 4px;
+      padding: 0.625rem 1.375rem;
+    }
+
+    div,
+    span {
+      display: inline;
+    }
+
+    div {
+      @screen md {
+        padding-top: 0.6875rem;
+      }
+    }
+  }
+
+  .grid .add-project {
+    @screen md {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      aspect-ratio: 422/324;
+    }
   }
 </style>

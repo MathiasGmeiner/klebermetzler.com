@@ -5,10 +5,6 @@ function ptr(px) {
   return `${px / 16}rem`;
 }
 
-function pxToRem(px) {
-  return ptr(px);
-}
-
 const screens = {
   md: "600px",
   lg: "1500px",

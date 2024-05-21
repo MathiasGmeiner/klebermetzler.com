@@ -6,14 +6,16 @@ import ProjectNavigation from "@components/ProjectNavigation.astro";
 import Wrapper from "@components/Wrapper.astro";
 
 const page: Page = Astro.props.page;
+const headline =
+  page.intendedTemplate === "project"
+    ? `${page.content.customer}<br />${page.content.projectname}`
+    : page.content.headline;
 ---
 
 <Wrapper>
   <div class="title">
     <div class="content">
-      <h1 class="fd-headbold">
-        {page.content.customer}<br />{page.content.projectname}
-      </h1>
+      <h1 class="fd-headbold" set:html={headline} />
       {
         page.content.subtitle && (
           <h2 class="fd-subtitle mt-2 md:mt-6 lg:mt-12">

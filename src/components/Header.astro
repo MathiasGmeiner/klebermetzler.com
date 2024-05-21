@@ -112,11 +112,7 @@ const getMenuLink = (uri: string) => {
           aria-label="Menu close"
           class="menu-icon hidden"
           data-trigger-menu-close
-          ><Image src={menuClose} alt="Menu close" class="md:hidden" /><Image
-            src={menuCloseDesktop}
-            alt="Menu close"
-            class="hidden md:block"
-          /></button
+          ><Image src={menuCloseDesktop} alt="Menu close" /></button
         >
       </div>
     </div>
@@ -192,15 +188,9 @@ const getMenuLink = (uri: string) => {
     pointer-events: auto;
     position: relative;
     z-index: 6;
-
-    @screen md {
-      width: 100%;
-    }
+    width: 100%;
     img {
-      @screen md {
-        height: auto;
-        width: 100%;
-      }
+      width: 100%;
     }
   }
 

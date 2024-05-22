@@ -11,14 +11,14 @@ const page: Page = Astro.props.page;
 <div>
   {
     page.content.overlay && (
-      <div class="overlay-wrapper">
-        <div class="overlay-content-wrapper">
+      <div class="overlay-wrapper" data-overlay-home-close>
+        <div class="overlay-content-wrapper" data-overlay-stoppropagation>
           <button
             data-overlay-home-close
             class="button"
             arial-label="Close Overlay"
           >
-            <Image src={iconClose} alt="Close Overlay" />
+            <Image src={iconClose} alt="Close Overlay" loading="eager" />
           </button>
           <div class="overlay-content">
             <div set:html={page.content.overlay.text} />
@@ -74,11 +74,13 @@ const page: Page = Astro.props.page;
         src={menuTagMobile}
         alt="klebermetzler"
         class="w-full h-full object-fill landscape:hidden"
+        loading="eager"
       />
       <Image
         src={menuTagDesktop}
         alt="klebermetzler"
         class="w-full h-full object-fill hidden landscape:block"
+        loading="eager"
       />
     </div>
   </div>
@@ -99,6 +101,15 @@ const page: Page = Astro.props.page;
       } else {
         toggleAds.textContent = "(Werbung ausblenden)";
       }
+    });
+
+    const stoppropagation = document.querySelectorAll(
+      "[data-overlay-stoppropagation]"
+    );
+    stoppropagation.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
     });
 
     const closeOverlay = document.querySelectorAll("[data-overlay-home-close]");

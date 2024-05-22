@@ -116,7 +116,7 @@ const textcolor = page.content.textcolor;
         --color-black: #000;
         --color-black-trans: rgba(0, 0, 0, 0.25);
         --color-white: #fff;
-        --color-white-transparent: rgba(255, 255, 255, 0.58);
+        --color-white-transparent: rgba(255, 255, 255, 0.78);
         --color-red: #ff1a36;
         --color-yellow: rgba(255, 237, 0, 0.5);
         --color-grey-transparent: rgba(217, 217, 217, 0.5);
@@ -167,7 +167,6 @@ const textcolor = page.content.textcolor;
 
       .overlay-content-wrapper {
         width: 90vw;
-        min-height: 50vh;
         max-height: 80vh;
         position: relative;
         display: flex;
@@ -180,7 +179,7 @@ const textcolor = page.content.textcolor;
           border: 2px solid var(--color-black);
           background-color: var(--color-white);
           position: absolute;
-          top: 0.5rem;
+          top: -0.5rem;
           right: 0.5rem;
           box-shadow: #fff 0 0 0 2px;
 
@@ -204,7 +203,6 @@ const textcolor = page.content.textcolor;
         color: var(--color-black);
         border: 2px solid var(--color-black);
         padding: 0.25rem;
-        min-height: calc(50vh - 2rem);
         width: calc(100% - 2rem);
         height: calc(100% - 2rem);
 

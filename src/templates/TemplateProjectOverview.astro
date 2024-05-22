@@ -83,7 +83,7 @@ const page: Page = Astro.props.page;
               )}
               <div>
                 <a href={item.uri}>
-                  <div class="image border-2">
+                  <div class="image">
                     <CustomPicture
                       sources={sources}
                       fallback={{
@@ -93,6 +93,7 @@ const page: Page = Astro.props.page;
                       }}
                       alt={item.image.alt}
                       lazy={index > 3}
+                      objectfit={true}
                     />
                     <div class="text-mobile-bu bg-grey-caption inline-flex px-1.5 absolute bottom-0 left-0">{`${item.customer} - ${item.projectname}`}</div>
                   </div>
@@ -357,13 +358,10 @@ const page: Page = Astro.props.page;
   .grid .image {
     display: block;
 
-    img {
-      @screen md {
-        aspect-ratio: 422/315;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
+    @screen md {
+      aspect-ratio: 422 / 324;
+      width: 100%;
+      height: 100%;
     }
   }
   .grid .title {
@@ -374,8 +372,8 @@ const page: Page = Astro.props.page;
     display: inline-flex;
     column-gap: 0.25rem;
     background-color: var(--color-white-transparent);
-    border: 2px solid var(--color-black);
     padding: 0.25rem 1rem 0.175rem 1rem;
+    border: 2px solid var(--color-black);
     cursor: pointer;
 
     @screen md {
@@ -383,8 +381,23 @@ const page: Page = Astro.props.page;
     }
 
     @screen lg {
-      border-width: 4px;
       padding: 0.625rem 1.375rem;
+    }
+
+    @media screen and (min-width: 1050px) {
+      border-width: 3px;
+    }
+
+    @media screen and (min-width: 1400px) {
+      border-width: 4px;
+    }
+
+    @media screen and (min-width: 1900px) {
+      border-width: 5px;
+    }
+
+    @media screen and (min-width: 2000px) {
+      border-width: 6px;
     }
 
     div,

@@ -149,8 +149,20 @@ const textcolor = page.content.textcolor;
         width: 100%;
         position: relative;
 
-        @screen lg {
+        @media screen and (min-width: 1050px) {
+          border-width: 3px;
+        }
+
+        @media screen and (min-width: 1400px) {
           border-width: 4px;
+        }
+
+        @media screen and (min-width: 1900px) {
+          border-width: 5px;
+        }
+
+        @media screen and (min-width: 2000px) {
+          border-width: 6px;
         }
 
         img {

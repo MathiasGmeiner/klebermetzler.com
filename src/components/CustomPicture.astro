@@ -1,6 +1,6 @@
 ---
 import { getImage } from "astro:assets";
-const { fallback, alt, sources, lazy } = Astro.props;
+const { fallback, alt, sources, lazy, objectfit } = Astro.props;
 
 const fallbackImage = await getImage({
   src: fallback.src,
@@ -46,7 +46,9 @@ for (const source of sources) {
     src={fallbackImage.src}
     width={fallbackImage.attributes.width}
     height={fallbackImage.attributes.height}
-    class="w-full h-auto"
+    class:list={[
+      objectfit ? "w-full md:h-full md:object-cover" : "w-full h-auto",
+    ]}
     alt={alt}
   />
 </picture>

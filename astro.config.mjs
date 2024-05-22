@@ -10,7 +10,11 @@ export default defineConfig({
     tailwind({
       nesting: true,
     }),
-    sitemap(),
+    sitemap({
+      filter: (page) =>
+        page !== "https://www.klebermetzler.com/preview/" &&
+        page !== "https://beta.klebermetzler.com/preview/",
+    }),
   ],
   output: "hybrid",
   adapter: vercel({

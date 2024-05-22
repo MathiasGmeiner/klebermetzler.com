@@ -287,11 +287,12 @@ const page: Page = Astro.props.page;
   .project-list .title {
     display: flex;
     column-gap: 0.5rem;
-    align-items: flex-end;
+    align-items: center;
 
     @screen md {
       column-gap: 1.5rem;
       max-width: calc(100% - 23%);
+      //align-items: flex-end;
     }
 
     .customer {
@@ -320,15 +321,18 @@ const page: Page = Astro.props.page;
       font-family: theme(fontFamily.ppeditorialnew);
       font-size: 1.5625rem;
       line-height: 28px;
+      padding-top: 7px;
 
       @screen md {
-        font-size: 2.875rem;
-        line-height: 3.1875rem;
+        font-size: 41px;
+        line-height: 48px;
+        padding-top: 13px;
       }
 
       @screen lg {
         font-size: 4.75rem;
         line-height: 5.1875rem;
+        padding-top: 20px;
       }
     }
   }

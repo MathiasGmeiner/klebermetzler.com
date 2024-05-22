@@ -27,16 +27,8 @@ const getMenuLink = (uri: string) => {
     data-tag
   >
     <a href="/">
-      <Image
-        src={menuTagMobile}
-        alt="klebermetzler"
-        class="w-full h-full object-fill landscape:hidden"
-      />
-      <Image
-        src={menuTagDesktop}
-        alt="klebermetzler"
-        class="w-full h-full object-fill hidden landscape:block"
-      />
+      <Image src={menuTagMobile} alt="klebermetzler" class="mobile-mk-tag" />
+      <Image src={menuTagDesktop} alt="klebermetzler" class="desktop-mk-tag" />
     </a>
   </div>
   <div
@@ -101,9 +93,7 @@ const getMenuLink = (uri: string) => {
           }
         </ul>
       </nav>
-      <div
-        class="flex flex-col items-end gap-y-5 col-start-2 md:col-start-4 pointer-events-auto"
-      >
+      <div class="menu-close-column">
         <button aria-label="Menu" data-trigger-menu-open class="menu-icon"
           ><Image src={menu} alt="Menu" loading="eager" /></button
         >
@@ -201,6 +191,19 @@ const getMenuLink = (uri: string) => {
     @screen md {
       grid-template-columns: repeat(4, minmax(0, 1fr));
       column-gap: var(--gap);
+    }
+  }
+
+  .menu-close-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    row-gap: 1.25rem;
+    grid-column-start: 2;
+    pointer-events: none;
+
+    @screen md {
+      grid-column-start: 4;
     }
   }
 </style>

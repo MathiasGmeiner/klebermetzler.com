@@ -233,6 +233,25 @@ const textcolor = page.content.textcolor;
           padding: 2rem;
         }
       }
+
+      .mobile-mk-tag,
+      .desktop-mk-tag {
+        width: 100%;
+        height: calc(100dvh - 7rem);
+        object-fit: fill;
+
+        @media (orientation: landscape) {
+          display: none;
+        }
+      }
+
+      .desktop-mk-tag {
+        display: none;
+
+        @media (orientation: landscape) {
+          display: block;
+        }
+      }
     </style>
   </body>
 </html>

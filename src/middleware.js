@@ -3,8 +3,6 @@ import { defineMiddleware } from "astro/middleware";
 export const onRequest = defineMiddleware((context, next) => {
   const hostname = context.url.hostname;
 
-  console.log(context);
-
   if (hostname === "klebermetzler.com") {
     return new Response(null, {
       status: 301,

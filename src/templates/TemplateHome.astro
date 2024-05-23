@@ -57,11 +57,13 @@ const page: Page = Astro.props.page;
                   <div class="caption fd-subtitle">{item.caption}</div>
                 )}
               </div>
-              <a
-                class="link"
-                href={item.link.href}
-                aria-label={item.link.title}
-              />
+              {item.link && (
+                <a
+                  class="link"
+                  href={item.link.href}
+                  aria-label={item.link.title}
+                />
+              )}
             </div>
           );
         })

@@ -23,5 +23,5 @@ export default defineConfig({
   image: {
     domains: ["cms.klebermetzler.com", "cms.klebermetzler.test"],
   },
-  site: "https://beta.klebermetzler.com",
+  site: "https://www.klebermetzler.com",
 });

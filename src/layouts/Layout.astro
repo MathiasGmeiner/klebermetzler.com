@@ -4,6 +4,7 @@ import AstroDebugger from "@/components/AstroDebugger.astro";
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 import { ViewTransitions } from "astro:transitions";
+import { Fathom } from "astro-fathom";
 
 const page = Astro.props.page;
 const preview = Astro.props.preview;
@@ -79,11 +80,7 @@ const textcolor = page.content.textcolor;
     <slot />
     <Footer global={Astro.props.global} />
 
-    <script
-      is:inline
-      src="https://cdn.usefathom.com/script.js"
-      data-site="QGOUPIBS"
-      defer></script>
+    <Fathom site="QGOUPIBS" />
     <style is:global define:vars={{ backgroundcolor, textcolor }}>
       @font-face {
         font-family: "pp-editorial-new";

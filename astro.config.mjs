@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel/serverless";
+import node from "@astrojs/node";
 
 import sitemap from "@astrojs/sitemap";
 
@@ -17,11 +17,8 @@ export default defineConfig({
     }),
   ],
   output: "hybrid",
-  adapter: vercel({
-    //imageService: true,
-    isr: {
-      expiration: 60 * 60 * 24,
-    },
+  adapter: node({
+    mode: "standalone",
   }),
   image: {
     domains: ["cms.klebermetzler.com", "cms.klebermetzler.test"],

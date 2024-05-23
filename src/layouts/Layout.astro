@@ -78,6 +78,12 @@ const textcolor = page.content.textcolor;
     <Header page={page} global={Astro.props.global} preview={preview} />
     <slot />
     <Footer global={Astro.props.global} />
+
+    <script
+      is:inline
+      src="https://cdn.usefathom.com/script.js"
+      data-site="QGOUPIBS"
+      defer></script>
     <style is:global define:vars={{ backgroundcolor, textcolor }}>
       @font-face {
         font-family: "pp-editorial-new";

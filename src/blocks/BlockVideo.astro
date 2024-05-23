@@ -26,18 +26,22 @@ const autoplay = block.content.autoplay ? "autoplay" : null;
           ><img src={block.content.poster.link} /></media-poster
         >
       </media-provider>
-      <media-controls>
-        <media-controls-group>
-          <media-tooltip>
-            <media-tooltip-trigger>
-              <media-play-button class="text-mobile-copy lg:text-copy">
-                <div>Play</div>
-                <div>Pause</div>
-              </media-play-button>
-            </media-tooltip-trigger>
-          </media-tooltip>
-        </media-controls-group>
-      </media-controls>
+      {
+        !autoplay && (
+          <media-controls>
+            <media-controls-group>
+              <media-tooltip>
+                <media-tooltip-trigger>
+                  <media-play-button class="text-mobile-copy lg:text-copy">
+                    <div>Play</div>
+                    <div>Pause</div>
+                  </media-play-button>
+                </media-tooltip-trigger>
+              </media-tooltip>
+            </media-controls-group>
+          </media-controls>
+        )
+      }
     </media-player>
   </div>
 </div>

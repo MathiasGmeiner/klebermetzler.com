@@ -1,12 +1,13 @@
-export const onRequest = defineMiddleware((context, next) => {
-  const { request } = context;
-  const { host } = request.headers;
+import { defineMiddleware } from "astro/middleware";
 
-  if (host?.slice(0, 4) !== "www." && !host?.includes("localhost")) {
+export const onRequest = defineMiddleware((context, next) => {
+  const hostname = context.url.hostname;
+
+  if (hostname === "klebermetzler.com") {
     return new Response(null, {
       status: 301,
       headers: {
-        Location: `https://www.${host}${request.url}`,
+        Location: `https://www.${hostname}${context.url.pathname}`,
       },
     });
   }

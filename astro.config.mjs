@@ -24,4 +24,7 @@ export default defineConfig({
     domains: ["cms.klebermetzler.com", "cms.klebermetzler.test"],
   },
   site: "https://www.klebermetzler.com",
+  experimental: {
+    rewriting: true,
+  },
 });

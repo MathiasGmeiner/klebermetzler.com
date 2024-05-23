@@ -16,7 +16,7 @@ export default defineConfig({
         page !== "https://beta.klebermetzler.com/preview/",
     }),
   ],
-  output: "hybrid",
+  output: "server",
   adapter: node({
     mode: "standalone",
   }),

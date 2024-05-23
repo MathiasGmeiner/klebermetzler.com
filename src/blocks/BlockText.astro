@@ -12,7 +12,10 @@ const textStyles = {
 };
 ---
 
-<div class:list={["text", { centered: block.layout == "1/2" }]}>
+<div
+  id={block.content.anchor ? block.content.anchor : null}
+  class:list={["text", { centered: block.layout == "1/2" }]}
+>
   <div class={textStyles[content.style]} set:html={content.text} />
 </div>
 

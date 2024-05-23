@@ -7,6 +7,7 @@ const autoplay = block.content.autoplay ? "autoplay" : null;
 ---
 
 <div
+  id={block.content.anchor ? block.content.anchor : null}
   class:list={[
     { wrapper: width < height },
     { "wrapper-landscape": width > height },

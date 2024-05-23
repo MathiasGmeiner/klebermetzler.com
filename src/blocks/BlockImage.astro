@@ -34,7 +34,7 @@ sources = Object.entries(
 }));
 ---
 
-<div class="image">
+<div class="image" id={block.content.anchor ? block.content.anchor : null}>
   <CustomPicture
     sources={sources}
     fallback={{ src: content.image.src, width: 1200, ratio: ratio }}

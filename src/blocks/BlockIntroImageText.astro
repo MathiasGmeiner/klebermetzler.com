@@ -18,7 +18,7 @@ interface Item {
 }
 ---
 
-<div>
+<div id={block.content.anchor ? block.content.anchor : null}>
   {
     content.headline && (
       <HeadlineLevel

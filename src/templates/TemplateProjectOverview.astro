@@ -55,10 +55,8 @@ const page: Page = Astro.props.page;
           const ratio = item.image ? item.image.width / item.image.height : 1;
           let sources = [];
           let breakpoints = {
-            "2200px": 900,
-            "1600px": 600,
-            "900px": 400,
-            "0px": 600,
+            "1600px": 400,
+            "0px": 300,
           };
           sources = Object.entries(breakpoints).map(([breakpoint, width]) => ({
             breakpoint,

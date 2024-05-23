@@ -269,7 +269,7 @@ const page: Page = Astro.props.page;
   .caption {
     position: absolute;
     left: 1rem;
-    bottom: 2dvh;
+    top: calc(100svh - 2rem);
     color: #fff;
     text-shadow:
       1px 0 0 var(--color-black),
@@ -279,6 +279,7 @@ const page: Page = Astro.props.page;
 
     @screen md {
       left: 2.5rem;
+      top: auto;
       bottom: 1.25rem;
     }
   }

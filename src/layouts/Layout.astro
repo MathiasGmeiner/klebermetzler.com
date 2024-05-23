@@ -73,6 +73,7 @@ const textcolor = page.content.textcolor;
         <AstroDebugger page={page} global={Astro.props.global} />
       )
     }
+    <Fathom site="QGOUPIBS" />
     <ViewTransitions />
   </head>
   <body class:list={[{ "pt-5 xl:pt-10": page.intendedTemplate !== "home" }]}>
@@ -80,7 +81,6 @@ const textcolor = page.content.textcolor;
     <slot />
     <Footer global={Astro.props.global} />
 
-    <Fathom site="QGOUPIBS" />
     <style is:global define:vars={{ backgroundcolor, textcolor }}>
       @font-face {
         font-family: "pp-editorial-new";

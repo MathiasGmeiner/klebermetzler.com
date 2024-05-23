@@ -38,19 +38,15 @@ const page: Page = Astro.props.page;
         </button>
       </div>
     </div>
-    <h1 class="fd-headbold headline" set:html={page.content.headline} />
-    {
-      page.content.subtitle && (
-        <h2 class="fd-subtitle mt-2 md:mt-6 lg:mt-12">
-          {page.content.subtitle}
-        </h2>
-      )
-    }
-    <div class="project-list-placeholder">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+    <div class="mb-2 md:mb-6 lg:mb-12">
+      <h1 class="fd-headbold headline" set:html={page.content.headline} />
+      {
+        page.content.subtitle && (
+          <h2 class="fd-subtitle mt-2 md:mt-6 lg:mt-12">
+            {page.content.subtitle}
+          </h2>
+        )
+      }
     </div>
     <div data-list class="project-list grid">
       {
@@ -170,12 +166,6 @@ const page: Page = Astro.props.page;
 </script>
 
 <style>
-  .headline {
-    @screen md {
-      position: absolute;
-      margin-bottom: 0;
-    }
-  }
   .list-toggle-mobile {
     margin-bottom: 2rem;
     width: 100%;

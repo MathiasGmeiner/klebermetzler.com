@@ -284,9 +284,9 @@ const page: Page = Astro.props.page;
 
   .button-advertisement {
     position: absolute;
-    bottom: 5rem;
+    top: 1.25rem;
     z-index: 5;
-    right: 1rem;
+    left: 1rem;
     color: var(--color-yellow);
     text-shadow:
       1px 0 0 var(--color-black-trans),
@@ -295,7 +295,10 @@ const page: Page = Astro.props.page;
       0 -1px 0 var(--color-black-trans);
 
     @screen md {
+      top: auto;
       bottom: 1.25rem;
+      right: 1rem;
+      left: auto;
     }
   }
 

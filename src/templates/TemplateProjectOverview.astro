@@ -371,6 +371,18 @@ const page: Page = Astro.props.page;
     display: none;
   }
 
+  .add-project-wrapper {
+    margin-top: 0.75rem;
+
+    @screen md {
+      margin-top: 1.5rem;
+    }
+  }
+
+  .project-list.grid .add-project-wrapper {
+    margin-top: 0;
+  }
+
   .add-project {
     display: inline-flex;
     column-gap: 0.25rem;

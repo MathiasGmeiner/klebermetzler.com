@@ -38,7 +38,7 @@ const page: Page = Astro.props.page;
         </button>
       </div>
     </div>
-    <div class="mb-2 md:mb-6 lg:mb-12">
+    <div class="headline-wrapper">
       <h1 class="fd-headbold headline" set:html={page.content.headline} />
       {
         page.content.subtitle && (
@@ -166,6 +166,13 @@ const page: Page = Astro.props.page;
 </script>
 
 <style>
+  .headline-wrapper {
+    @apply mb-2 md:mb-6 lg:mb-12;
+
+    @screen md {
+      min-height: clamp(6.25rem, 17vw, 43.75rem);
+    }
+  }
   .list-toggle-mobile {
     margin-bottom: 2rem;
     width: 100%;

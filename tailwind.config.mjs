@@ -142,12 +142,15 @@ const fontSizes = {
     },
     md: {
       fontSize: "clamp(1.5rem, 2.4vw, 2.3125rem)",
+      lineHeight: 1.3,
     },
     lg: {
       fontSize: "clamp(2.3125rem, 2.6vw, 3.125rem)",
+      lineHeight: 1.3,
     },
     xl: {
       fontSize: "clamp(3.125rem, 2.6vw, 4.125rem)",
+      lineHeight: 1.3,
     },
   },
 };

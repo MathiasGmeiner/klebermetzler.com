@@ -9,304 +9,376 @@ const page: Page = Astro.props.page;
 ---
 
 <div>
-  {
-    page.content.overlay && (
-      <div class="overlay-wrapper" data-overlay-home-close>
-        <div class="overlay-content-wrapper" data-overlay-stoppropagation>
-          <button
-            data-overlay-home-close
-            class="button"
-            arial-label="Close Overlay"
-          >
-            <Image src={iconClose} alt="Close Overlay" loading="eager" />
-          </button>
-          <div class="overlay-content">
-            <div set:html={page.content.overlay.text} />
-          </div>
-        </div>
-      </div>
-    )
-  }
-  <div class="swiper">
-    <div class="swiper-wrapper">
-      {
-        page.content.slider?.map((item) => {
-          const { mobile, desktop } = item.image;
-          return (
-            <div class="swiper-slide item">
-              <div class="image">
-                <Image
-                  src={mobile.src}
-                  alt={mobile.alt}
-                  width={mobile.width}
-                  height={mobile.height}
-                  widths={[400, 800, 1000]}
-                  sizes="100vw"
-                  class="mobile"
-                />
-                <Image
-                  src={desktop.src}
-                  alt={desktop.alt}
-                  width={desktop.width}
-                  height={desktop.height}
-                  widths={[1000, 1600, 2400]}
-                  sizes="100vw"
-                  class="desktop"
-                />
-                {item.caption && (
-                  <div class="caption fd-subtitle">{item.caption}</div>
-                )}
-              </div>
-              {item.link && (
-                <a
-                  class="link"
-                  href={item.link.href}
-                  aria-label={item.link.title}
-                />
-              )}
-            </div>
-          );
-        })
-      }
-    </div>
-    <div class="swiper-button-prev fd-sublight">← zurück</div>
-    <div class="swiper-button-next fd-sublight">weiter →</div>
-    <div class="advertising" data-advertising>
-      <Image
-        src={menuTagMobile}
-        alt="klebermetzler"
-        class="mobile-mk-tag"
-        loading="eager"
-      />
-      <Image
-        src={menuTagDesktop}
-        alt="klebermetzler"
-        class="desktop-mk-tag"
-        loading="eager"
-      />
-    </div>
-  </div>
-  <button class="button-advertisement fd-bu" data-button-advertising
-    >(Werbung ausblenden)</button
-  >
+	{
+		page.content.overlay && (
+			<div class="overlay-wrapper" data-overlay-home-close>
+				<div
+					class="overlay-content-wrapper"
+					data-overlay-stoppropagation
+				>
+					<button
+						data-overlay-home-close
+						class="button"
+						arial-label="Close Overlay"
+					>
+						<Image
+							src={iconClose}
+							alt="Close Overlay"
+							loading="eager"
+						/>
+					</button>
+					<div class="overlay-content">
+						<div set:html={page.content.overlay.text} />
+					</div>
+				</div>
+			</div>
+		)
+	}
+
+	<div class="glider">
+		{
+			page.content.slider?.map((item) => {
+				const { mobile, desktop } = item.image;
+				return (
+					<div class="item">
+						<div class="image">
+							<Image
+								src={mobile.src}
+								alt={mobile.alt}
+								width={mobile.width}
+								height={mobile.height}
+								widths={[400, 800, 1000]}
+								sizes="100vw"
+								class="mobile"
+							/>
+							<Image
+								src={desktop.src}
+								alt={desktop.alt}
+								width={desktop.width}
+								height={desktop.height}
+								widths={[1000, 1600, 2400]}
+								sizes="100vw"
+								class="desktop"
+							/>
+							{item.caption && (
+								<div class="caption fd-subtitle">
+									{item.caption}
+								</div>
+							)}
+						</div>
+						{item.link && (
+							<a
+								class="link"
+								href={item.link.href}
+								aria-label={item.link.title}
+							/>
+						)}
+					</div>
+				);
+			})
+		}
+	</div>
+	<div class="prev fd-sublight">← zurück</div>
+	<div class="next fd-sublight">weiter →</div>
+	<div class="advertising" data-advertising>
+		<Image
+			src={menuTagMobile}
+			alt="klebermetzler"
+			class="mobile-mk-tag"
+			loading="eager"
+		/>
+		<Image
+			src={menuTagDesktop}
+			alt="klebermetzler"
+			class="desktop-mk-tag"
+			loading="eager"
+		/>
+	</div>
+
+	<button class="button-advertisement fd-bu" data-button-advertising
+		>(Werbung ausblenden)</button
+	>
 </div>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
-    const toggleAds = document.querySelector("[data-button-advertising]");
-    toggleAds?.addEventListener("click", () => {
-      const hideAds = document.querySelector("[data-advertising]");
-      hideAds.classList.toggle("ads-hidden");
+	import Glider from "glider-js";
+	import "glider-js/glider.min.css";
 
-      if (hideAds.classList.contains("ads-hidden")) {
-        toggleAds.textContent = "(Werbung einblenden)";
-      } else {
-        toggleAds.textContent = "(Werbung ausblenden)";
-      }
-    });
+	document.addEventListener("astro:page-load", () => {
+		new Glider(document.querySelector(".glider"), {
+			slidesToShow: 1,
+			arrows: {
+				prev: ".prev",
+				next: ".next",
+			},
+		});
 
-    const stoppropagation = document.querySelectorAll(
-      "[data-overlay-stoppropagation]"
-    );
-    stoppropagation.forEach((button) => {
-      button.addEventListener("click", (event) => {
-        event.stopPropagation();
-      });
-    });
+		const toggleAds = document.querySelector("[data-button-advertising]");
+		toggleAds?.addEventListener("click", () => {
+			const hideAds = document.querySelector("[data-advertising]");
+			hideAds.classList.toggle("ads-hidden");
 
-    const closeOverlay = document.querySelectorAll("[data-overlay-home-close]");
-    closeOverlay.forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelector(".overlay-wrapper").remove();
-      });
-    });
-  });
-</script>
+			if (hideAds.classList.contains("ads-hidden")) {
+				toggleAds.textContent = "(Werbung einblenden)";
+			} else {
+				toggleAds.textContent = "(Werbung ausblenden)";
+			}
+		});
 
-<script>
-  import Swiper from "swiper";
-  import { Navigation } from "swiper/modules";
-  import "swiper/css";
-  import "swiper/css/navigation";
+		const stoppropagation = document.querySelectorAll(
+			"[data-overlay-stoppropagation]",
+		);
+		stoppropagation.forEach((button) => {
+			button.addEventListener("click", (event) => {
+				event.stopPropagation();
+			});
+		});
 
-  new Swiper(".swiper", {
-    modules: [Navigation],
-    loop: true,
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-  });
+		const closeOverlay = document.querySelectorAll(
+			"[data-overlay-home-close]",
+		);
+		closeOverlay.forEach((button) => {
+			button.addEventListener("click", () => {
+				document.querySelector(".overlay-wrapper").remove();
+			});
+		});
+	});
 </script>
 
 <style is:global>
-  .overlay-content {
-    h1,
-    h2,
-    p {
-      display: inline;
-    }
-    h1 {
-      color: var(--color-red);
-      font-family: theme(fontFamily.nationalCompressedExtrabold);
-      font-weight: normal;
-      font-size: clamp(2.5rem, 10vw, 9.9375rem);
-      line-height: 0.85;
-      text-transform: uppercase;
+	.overlay-content {
+		h1,
+		h2,
+		p {
+			display: inline;
+		}
+		h1 {
+			color: var(--color-red);
+			font-family: theme(fontFamily.nationalCompressedExtrabold);
+			font-weight: normal;
+			font-size: clamp(2.5rem, 10vw, 9.9375rem);
+			line-height: 0.85;
+			text-transform: uppercase;
 
-      @md {
-        line-height: 0.91;
-      }
-    }
+			@md {
+				line-height: 0.91;
+			}
+		}
 
-    h2 {
-      color: var(--color-black);
-      font-family: theme(fontFamily.ppeditorialnew);
-      font-weight: normal;
-      font-size: clamp(1.9375rem, 8.08vw, 7.1875rem);
-      line-height: 1.1;
-    }
+		h2 {
+			color: var(--color-black);
+			font-family: theme(fontFamily.ppeditorialnew);
+			font-weight: normal;
+			font-size: clamp(1.9375rem, 8.08vw, 7.1875rem);
+			line-height: 1.1;
+		}
 
-    a {
-      text-decoration: underline;
-    }
-  }
+		a {
+			text-decoration: underline;
+		}
+	}
 </style>
 
 <style>
-  .advertising {
-    position: absolute;
-    inset: 3.5rem 2rem;
-    z-index: 5;
-    pointer-events: none;
-  }
+	.overlay-wrapper {
+		position: fixed;
+		inset: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 11;
+	}
 
-  .swiper-button-prev:after,
-  .swiper-button-next:after {
-    content: "";
-    display: none;
-  }
-  .swiper-button-prev,
-  .swiper-button-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    white-space: nowrap;
-    width: auto;
-    color: var(--color-white);
-    transition: all 0.2s ease;
-    text-shadow:
-      1px 0 0 var(--color-black),
-      -1px 0 0 var(--color-black),
-      0 1px 0 var(--color-black),
-      0 -1px 0 var(--color-black),
-      2px 2px 8px rgba(0, 0, 0, 0.75);
+	.overlay-hidden {
+		display: none;
+	}
 
-    &:hover {
-      text-shadow:
-        1px 0 0 var(--color-black),
-        -1px 0 0 var(--color-black),
-        0 1px 0 var(--color-black),
-        0 -1px 0 var(--color-black),
-        2px 2px 2px rgba(0, 0, 0, 0.75);
-    }
-  }
+	.overlay-content-wrapper {
+		width: 90vw;
+		max-height: 80vh;
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-  .swiper-button-prev {
-    left: 1rem;
+		.button {
+			width: 1.5625rem;
+			height: 1.5625rem;
+			border: 2px solid var(--color-black);
+			background-color: var(--color-white);
+			position: absolute;
+			top: -0.5rem;
+			right: 0.5rem;
+			box-shadow: #fff 0 0 0 2px;
 
-    @screen md {
-      left: 2.5rem;
-    }
-  }
+			@screen md {
+				width: 2.5rem;
+				height: 2.5rem;
+				border-width: 4px;
+				box-shadow: #fff 0 0 0 4px;
+			}
 
-  .swiper-button-next {
-    right: 1rem;
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: fill;
+			}
+		}
+	}
 
-    @screen md {
-      right: 2.5rem;
-    }
-  }
+	.overlay-content {
+		background-color: var(--color-white-transparent);
+		color: var(--color-black);
+		border: 2px solid var(--color-black);
+		padding: 0.25rem;
+		width: calc(100% - 2rem);
+		height: calc(100% - 2rem);
 
-  .item {
-    width: 100%;
-    height: 100vh;
-    position: relative;
+		@screen md {
+			border-width: 4px;
+			padding: 0.5rem;
+		}
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+		@screen lg {
+			padding: 2rem;
+		}
+	}
 
-    .image {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
+	.advertising {
+		position: absolute;
+		inset: 3.5rem 2rem;
+		z-index: 5;
+		pointer-events: none;
+	}
 
-    .mobile {
-      @screen md {
-        display: none;
-      }
-    }
+	.prev:after,
+	.next:after {
+		content: "";
+		display: none;
+	}
+	.prev,
+	.next {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		z-index: 10;
+		white-space: nowrap;
+		width: auto;
+		color: var(--color-white);
+		cursor: pointer;
+		z-index: 5;
+		transition: all 0.2s ease;
+		text-shadow:
+			1px 0 0 var(--color-black),
+			-1px 0 0 var(--color-black),
+			0 1px 0 var(--color-black),
+			0 -1px 0 var(--color-black),
+			2px 2px 8px rgba(0, 0, 0, 0.75);
 
-    .desktop {
-      display: none;
+		&:hover {
+			text-shadow:
+				1px 0 0 var(--color-black),
+				-1px 0 0 var(--color-black),
+				0 1px 0 var(--color-black),
+				0 -1px 0 var(--color-black),
+				2px 2px 2px rgba(0, 0, 0, 0.75);
+		}
+	}
 
-      @screen md {
-        display: block;
-      }
-    }
+	.prev {
+		left: 1rem;
 
-    .link {
-      position: absolute;
-      inset: 0;
-      pointer-events: auto;
-    }
-  }
+		@screen md {
+			left: 2.5rem;
+		}
+	}
 
-  .caption {
-    position: absolute;
-    left: 1rem;
-    top: calc(100svh - 2rem);
-    color: #fff;
-    text-shadow:
-      1px 0 0 var(--color-black),
-      -1px 0 0 var(--color-black),
-      0 1px 0 var(--color-black),
-      0 -1px 0 var(--color-black);
+	.next {
+		right: 1rem;
 
-    @screen md {
-      left: 2.5rem;
-      top: auto;
-      bottom: 1.25rem;
-    }
-  }
+		@screen md {
+			right: 2.5rem;
+		}
+	}
 
-  .button-advertisement {
-    position: absolute;
-    top: 1.25rem;
-    z-index: 5;
-    left: 1rem;
-    color: var(--color-yellow);
-    text-shadow:
-      1px 0 0 var(--color-black-trans),
-      -1px 0 0 var(--color-black-trans),
-      0 1px 0 var(--color-black-trans),
-      0 -1px 0 var(--color-black-trans);
+	.item {
+		width: 100%;
+		height: 100vh;
+		position: relative;
 
-    @screen md {
-      top: auto;
-      bottom: 1.25rem;
-      right: 1rem;
-      left: auto;
-    }
-  }
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
 
-  [data-advertising].ads-hidden {
-    display: none;
-  }
+		.image {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			pointer-events: none;
+		}
+
+		.mobile {
+			@screen md {
+				display: none;
+			}
+		}
+
+		.desktop {
+			display: none;
+
+			@screen md {
+				display: block;
+			}
+		}
+
+		.link {
+			position: absolute;
+			inset: 0;
+			pointer-events: auto;
+		}
+	}
+
+	.caption {
+		position: absolute;
+		left: 1rem;
+		top: calc(100svh - 2rem);
+		color: #fff;
+		text-shadow:
+			1px 0 0 var(--color-black),
+			-1px 0 0 var(--color-black),
+			0 1px 0 var(--color-black),
+			0 -1px 0 var(--color-black);
+
+		@screen md {
+			left: 2.5rem;
+			top: auto;
+			bottom: 1.25rem;
+		}
+	}
+
+	.button-advertisement {
+		position: absolute;
+		top: 1.25rem;
+		z-index: 5;
+		left: 1rem;
+		color: var(--color-yellow);
+		text-shadow:
+			1px 0 0 var(--color-black-trans),
+			-1px 0 0 var(--color-black-trans),
+			0 1px 0 var(--color-black-trans),
+			0 -1px 0 var(--color-black-trans);
+
+		@screen md {
+			top: auto;
+			bottom: 1.25rem;
+			right: 1rem;
+			left: auto;
+		}
+	}
+
+	[data-advertising].ads-hidden {
+		display: none;
+	}
 </style>

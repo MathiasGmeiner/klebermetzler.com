@@ -17,254 +17,208 @@ const textcolor = page.content.textcolor;
 
 <!doctype html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link
-      rel="preload"
-      href="/fonts/national-2-narrow-medium.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin=""
-    />
-    <link
-      rel="preload"
-      href="/fonts/national-2-compressed-regular.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin=""
-    />
-    <link
-      rel="preload"
-      href="/fonts/national-2-compressed-extrabold.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin=""
-    />
-    {
-      metaTags.map((item) => {
-        if (item.attributes.name) {
-          return (
-            <meta
-              name={item.attributes.name}
-              content={item.attributes.content}
-            />
-          );
-        }
-        return (
-          <meta
-            property={item.attributes.property}
-            content={item.attributes.content}
-          />
-        );
-      })
-    }
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
-    <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="theme-color" content="#ffffff" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{metaTitle}</title>
-    {
-      import.meta.env.DEV && (
-        <AstroDebugger page={page} global={Astro.props.global} />
-      )
-    }
-    <Fathom site="QGOUPIBS" />
-    <ViewTransitions />
-  </head>
-  <body class:list={[{ "pt-5 xl:pt-10": page.intendedTemplate !== "home" }]}>
-    <Header page={page} global={Astro.props.global} preview={preview} />
-    <slot />
-    <Footer global={Astro.props.global} />
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link
+			rel="preload"
+			href="/fonts/national-2-narrow-medium.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin=""
+		/>
+		<link
+			rel="preload"
+			href="/fonts/national-2-compressed-regular.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin=""
+		/>
+		<link
+			rel="preload"
+			href="/fonts/national-2-compressed-extrabold.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin=""
+		/>
+		{
+			metaTags.map((item) => {
+				if (item.attributes.name) {
+					return (
+						<meta
+							name={item.attributes.name}
+							content={item.attributes.content}
+						/>
+					);
+				}
+				return (
+					<meta
+						property={item.attributes.property}
+						content={item.attributes.content}
+					/>
+				);
+			})
+		}
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/favicon-16x16.png"
+		/>
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
+		<meta name="msapplication-TileColor" content="#da532c" />
+		<meta name="theme-color" content="#ffffff" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{metaTitle}</title>
+		{
+			import.meta.env.DEV && (
+				<AstroDebugger page={page} global={Astro.props.global} />
+			)
+		}
+		<Fathom site="QGOUPIBS" />
+		<ViewTransitions />
+	</head>
+	<body class:list={[{ "pt-5 xl:pt-10": page.intendedTemplate !== "home" }]}>
+		<Header page={page} global={Astro.props.global} preview={preview} />
+		<slot />
+		<Footer global={Astro.props.global} />
 
-    <style is:global define:vars={{ backgroundcolor, textcolor }}>
-      @font-face {
-        font-family: "pp-editorial-new";
-        src: url("/fonts/PPEditorialNew-Regular.woff2") format("woff2");
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
+		<style is:global define:vars={{ backgroundcolor, textcolor }}>
+			@font-face {
+				font-family: "pp-editorial-new";
+				src: url("/fonts/PPEditorialNew-Regular.woff2") format("woff2");
+				font-weight: normal;
+				font-style: normal;
+				font-display: swap;
+			}
 
-      @font-face {
-        font-family: "national-2-narrow-medium";
-        src: url("/fonts/national-2-narrow-medium.woff2") format("woff2");
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
+			@font-face {
+				font-family: "national-2-narrow-medium";
+				src: url("/fonts/national-2-narrow-medium.woff2")
+					format("woff2");
+				font-weight: normal;
+				font-style: normal;
+				font-display: swap;
+			}
 
-      @font-face {
-        font-family: "national-2-compressed-regular";
-        src: url("/fonts/national-2-compressed-regular.woff2") format("woff2");
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
+			@font-face {
+				font-family: "national-2-compressed-regular";
+				src: url("/fonts/national-2-compressed-regular.woff2")
+					format("woff2");
+				font-weight: normal;
+				font-style: normal;
+				font-display: swap;
+			}
 
-      @font-face {
-        font-family: "national-2-compressed-extrabold";
-        src: url("/fonts/national-2-compressed-extrabold.woff2") format("woff2");
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
+			@font-face {
+				font-family: "national-2-compressed-extrabold";
+				src: url("/fonts/national-2-compressed-extrabold.woff2")
+					format("woff2");
+				font-weight: normal;
+				font-style: normal;
+				font-display: swap;
+			}
 
-      :root {
-        --font-national-narrow-medium: "national-2-narrow-medium", sans-serif;
-        --font-national-compressed-regular: "national-2-compressed-regular",
-          sans-serif;
-        --font-national-compressed-extrabold: "national-2-compressed-extrabold",
-          sans-serif;
-        --font-pp-editorial-new: "pp-editorial-new", sans-serif;
-        --spacing: clamp(3.125rem, 8vw, 9.375rem);
-        --color-black: #000;
-        --color-black-trans: rgba(0, 0, 0, 0.25);
-        --color-white: #fff;
-        --color-white-transparent: rgba(255, 255, 255, 0.78);
-        --color-red: #ff1a36;
-        --color-yellow: rgba(255, 237, 0, 0.5);
-        --color-grey-transparent: rgba(217, 217, 217, 0.5);
-        --gap: clamp(1.25rem, 2.5vw, 2.75rem);
-      }
+			:root {
+				--font-national-narrow-medium: "national-2-narrow-medium",
+					sans-serif;
+				--font-national-compressed-regular: "national-2-compressed-regular",
+					sans-serif;
+				--font-national-compressed-extrabold: "national-2-compressed-extrabold",
+					sans-serif;
+				--font-pp-editorial-new: "pp-editorial-new", sans-serif;
+				--spacing: clamp(3.125rem, 8vw, 9.375rem);
+				--color-black: #000;
+				--color-black-trans: rgba(0, 0, 0, 0.25);
+				--color-white: #fff;
+				--color-white-transparent: rgba(255, 255, 255, 0.78);
+				--color-red: #ff1a36;
+				--color-yellow: rgba(255, 237, 0, 0.5);
+				--color-grey-transparent: rgba(217, 217, 217, 0.5);
+				--gap: clamp(1.25rem, 2.5vw, 2.75rem);
+			}
 
-      body {
-        font-family: var(--font-national-narrow-medium);
-        background-color: var(--backgroundcolor);
-        color: var(--textcolor);
-        -webkit-font-smoothing: antialiased;
-      }
+			body {
+				font-family: var(--font-national-narrow-medium);
+				background-color: var(--backgroundcolor);
+				color: var(--textcolor);
+				-webkit-font-smoothing: antialiased;
+			}
 
-      .spacingTop {
-        margin-top: var(--spacing);
-      }
+			.spacingTop {
+				margin-top: var(--spacing);
+			}
 
-      video {
-        width: 100%;
-      }
+			video {
+				width: 100%;
+			}
 
-      .image {
-        border: 2px solid var(--color-black);
-        width: 100%;
-        position: relative;
+			.image {
+				border: 2px solid var(--color-black);
+				width: 100%;
+				position: relative;
 
-        @media screen and (min-width: 1050px) {
-          border-width: 3px;
-        }
+				@media screen and (min-width: 1050px) {
+					border-width: 3px;
+				}
 
-        @media screen and (min-width: 1400px) {
-          border-width: 4px;
-        }
+				@media screen and (min-width: 1400px) {
+					border-width: 4px;
+				}
 
-        @media screen and (min-width: 1900px) {
-          border-width: 5px;
-        }
+				@media screen and (min-width: 1900px) {
+					border-width: 5px;
+				}
 
-        @media screen and (min-width: 2000px) {
-          border-width: 6px;
-        }
+				@media screen and (min-width: 2000px) {
+					border-width: 6px;
+				}
 
-        img {
-          width: 100%;
-        }
-      }
+				img {
+					width: 100%;
+				}
+			}
 
-      .overlay-wrapper {
-        position: fixed;
-        inset: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 10;
-      }
+			.mobile-mk-tag,
+			.desktop-mk-tag {
+				width: 100%;
+				height: calc(100dvh - 7rem);
+				object-fit: fill;
 
-      .overlay-hidden {
-        display: none;
-      }
+				@media (orientation: landscape) {
+					display: none;
+				}
+			}
 
-      .overlay-content-wrapper {
-        width: 90vw;
-        max-height: 80vh;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+			.desktop-mk-tag {
+				display: none;
 
-        .button {
-          width: 1.5625rem;
-          height: 1.5625rem;
-          border: 2px solid var(--color-black);
-          background-color: var(--color-white);
-          position: absolute;
-          top: -0.5rem;
-          right: 0.5rem;
-          box-shadow: #fff 0 0 0 2px;
+				@media (orientation: landscape) {
+					display: block;
+				}
+			}
 
-          @screen md {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-width: 4px;
-            box-shadow: #fff 0 0 0 4px;
-          }
-
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: fill;
-          }
-        }
-      }
-
-      .overlay-content {
-        background-color: var(--color-white-transparent);
-        color: var(--color-black);
-        border: 2px solid var(--color-black);
-        padding: 0.25rem;
-        width: calc(100% - 2rem);
-        height: calc(100% - 2rem);
-
-        @screen md {
-          border-width: 4px;
-          padding: 0.5rem;
-        }
-
-        @screen lg {
-          padding: 2rem;
-        }
-      }
-
-      .mobile-mk-tag,
-      .desktop-mk-tag {
-        width: 100%;
-        height: calc(100dvh - 7rem);
-        object-fit: fill;
-
-        @media (orientation: landscape) {
-          display: none;
-        }
-      }
-
-      .desktop-mk-tag {
-        display: none;
-
-        @media (orientation: landscape) {
-          display: block;
-        }
-      }
-
-      .fd-headlight,
-      .fd-headbold,
-      .fd-subbold,
-      .fd-sublight,
-      .fd-copy {
-        a {
-          text-decoration: underline;
-        }
-      }
-    </style>
-  </body>
+			.fd-headlight,
+			.fd-headbold,
+			.fd-subbold,
+			.fd-sublight,
+			.fd-copy {
+				a {
+					text-decoration: underline;
+				}
+			}
+		</style>
+	</body>
 </html>

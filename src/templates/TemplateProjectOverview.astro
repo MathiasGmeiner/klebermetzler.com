@@ -12,431 +12,437 @@ import CustomPicture from "@components/CustomPicture.astro";
 const page: Page = Astro.props.page;
 ---
 
-{
-  page.content.overlay && (
-    <div class="overlay-wrapper overlay-hidden">
-      <div class="overlay-content-wrapper">
-        <button data-overlay-close class="button" arial-label="Close Overlay">
-          <Image src={iconClose} alt="Close Overlay" />
-        </button>
-        <div class="overlay-content">
-          <div set:html={page.content.overlay.text} />
-        </div>
-      </div>
-    </div>
-  )
-}
 <Wrapper>
-  <div class="relative">
-    <div class="list-toggle-mobile">
-      <div class="buttons">
-        <button data-trigger-style-grid arial-label="Raster">
-          <Image src={iconGrid} alt="Icon Raster" />
-        </button>
-        <button data-trigger-style-list aria-label="Liste">
-          <Image src={iconList} alt="Icon Liste" />
-        </button>
-      </div>
-    </div>
-    <div class="headline-wrapper">
-      <h1 class="fd-headbold headline" set:html={page.content.headline} />
-      {
-        page.content.subtitle && (
-          <h2 class="fd-subtitle mt-2 md:mt-6 lg:mt-12">
-            {page.content.subtitle}
-          </h2>
-        )
-      }
-    </div>
-    <div data-list class="project-list grid">
-      {
-        page.content.items.map((item, index) => {
-          if (!item.image) {
-            return null;
-          }
+	<div class="relative">
+		<div class="list-toggle-mobile">
+			<div class="buttons">
+				<button data-trigger-style-grid arial-label="Raster">
+					<Image src={iconGrid} alt="Icon Raster" />
+				</button>
+				<button data-trigger-style-list aria-label="Liste">
+					<Image src={iconList} alt="Icon Liste" />
+				</button>
+			</div>
+		</div>
+		<div class="headline-wrapper">
+			<h1 class="fd-headbold headline" set:html={page.content.headline} />
+			{
+				page.content.subtitle && (
+					<h2 class="fd-subtitle mt-2 md:mt-6 lg:mt-12">
+						{page.content.subtitle}
+					</h2>
+				)
+			}
+		</div>
+		<div data-list class="project-list grid">
+			{
+				page.content.items.map((item, index) => {
+					if (!item.image) {
+						return null;
+					}
 
-          const ratio = item.image ? item.image.width / item.image.height : 1;
-          let sources = [];
-          let breakpoints = {
-            "1600px": 400,
-            "0px": 300,
-          };
-          sources = Object.entries(breakpoints).map(([breakpoint, width]) => ({
-            breakpoint,
-            image: item.image,
-            ratio: ratio,
-            width,
-          }));
+					const ratio = item.image
+						? item.image.width / item.image.height
+						: 1;
+					let sources = [];
+					let breakpoints = {
+						"1600px": 400,
+						"0px": 300,
+					};
+					sources = Object.entries(breakpoints).map(
+						([breakpoint, width]) => ({
+							breakpoint,
+							image: item.image,
+							ratio: ratio,
+							width,
+						}),
+					);
 
-          return (
-            <>
-              {index === 3 && (
-                <div class="list-toggle-desktop">
-                  <div class="list-toggle-desktop-buttons">
-                    <button data-trigger-style-grid arial-label="Raster">
-                      <Image src={iconGridDesktop} alt="Icon Raster" />
-                    </button>
-                    <button data-trigger-style-list aria-label="Liste">
-                      <Image src={iconListDesktop} alt="Icon Liste" />
-                    </button>
-                  </div>
-                </div>
-              )}
-              <div>
-                <a href={item.uri}>
-                  <div class="image">
-                    <CustomPicture
-                      sources={sources}
-                      fallback={{
-                        src: item.image.src,
-                        width: 1200,
-                        ratio: ratio,
-                      }}
-                      alt={item.image.alt}
-                      lazy={index > 3}
-                      objectfit={true}
-                    />
-                    <div class="text-mobile-bu bg-grey-caption inline-flex px-1.5 absolute bottom-0 left-0">{`${item.customer} - ${item.projectname}`}</div>
-                  </div>
-                  <div class="title">
-                    <div class="customer">{item.customer}</div>
-                    <div class="name">{item.projectname}</div>
-                  </div>
-                </a>
-              </div>
-            </>
-          );
-        })
-      }
-      {
-        page.content.overlay && (
-          <div class="add-project-wrapper" data-overlay-open>
-            <div class="add-project">
-              <span class="fd-subbold">+</span>
-              <div
-                class="fd-sublight md:fd-copy pt-0.5"
-                set:html={page.content.overlay.button}
-              />
-            </div>
-          </div>
-        )
-      }
-    </div>
-  </div>
+					return (
+						<>
+							{index === 3 && (
+								<div class="list-toggle-desktop">
+									<div class="list-toggle-desktop-buttons">
+										<button
+											data-trigger-style-grid
+											arial-label="Raster"
+										>
+											<Image
+												src={iconGridDesktop}
+												alt="Icon Raster"
+											/>
+										</button>
+										<button
+											data-trigger-style-list
+											aria-label="Liste"
+										>
+											<Image
+												src={iconListDesktop}
+												alt="Icon Liste"
+											/>
+										</button>
+									</div>
+								</div>
+							)}
+							<div>
+								<a href={item.uri}>
+									<div class="image">
+										<CustomPicture
+											sources={sources}
+											fallback={{
+												src: item.image.src,
+												width: 1200,
+												ratio: ratio,
+											}}
+											alt={item.image.alt}
+											lazy={index > 3}
+											objectfit={true}
+										/>
+										<div class="text-mobile-bu bg-grey-caption inline-flex px-1.5 absolute bottom-0 left-0">{`${item.customer} - ${item.projectname}`}</div>
+									</div>
+									<div class="title">
+										<div class="customer">
+											{item.customer}
+										</div>
+										<div class="name">
+											{item.projectname}
+										</div>
+									</div>
+								</a>
+							</div>
+						</>
+					);
+				})
+			}
+			{
+				page.content.overlay && (
+					<div class="add-project-wrapper" data-overlay-open>
+						<div class="add-project">
+							<span class="fd-subbold">+</span>
+							<div
+								class="fd-sublight md:fd-copy pt-0.5"
+								set:html={page.content.overlay.button}
+							/>
+						</div>
+					</div>
+				)
+			}
+		</div>
+	</div>
 </Wrapper>
 <script>
-  document.addEventListener("astro:page-load", () => {
-    const triggerStyleList = document.querySelectorAll(
-      "[data-trigger-style-list]"
-    );
-    const triggerStyleGrid = document.querySelectorAll(
-      "[data-trigger-style-grid]"
-    );
+	document.addEventListener("astro:page-load", () => {
+		const triggerStyleList = document.querySelectorAll(
+			"[data-trigger-style-list]",
+		);
+		const triggerStyleGrid = document.querySelectorAll(
+			"[data-trigger-style-grid]",
+		);
 
-    triggerStyleList.forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelector("[data-list]").classList.remove("grid");
-      });
-    });
+		triggerStyleList.forEach((button) => {
+			button.addEventListener("click", () => {
+				document.querySelector("[data-list]").classList.remove("grid");
+			});
+		});
 
-    triggerStyleGrid.forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelector("[data-list]").classList.add("grid");
-      });
-    });
+		triggerStyleGrid.forEach((button) => {
+			button.addEventListener("click", () => {
+				document.querySelector("[data-list]").classList.add("grid");
+			});
+		});
 
-    const openOverlay = document.querySelectorAll("[data-overlay-open]");
-    openOverlay.forEach((button) => {
-      button.addEventListener("click", () => {
-        document
-          .querySelector(".overlay-wrapper")
-          .classList.remove("overlay-hidden");
-      });
-    });
+		const openOverlay = document.querySelectorAll("[data-overlay-open]");
+		openOverlay.forEach((button) => {
+			button.addEventListener("click", () => {
+				document
+					.querySelector(".overlay-wrapper")
+					.classList.remove("overlay-hidden");
+			});
+		});
 
-    const closeOverlay = document.querySelectorAll("[data-overlay-close]");
-    closeOverlay.forEach((button) => {
-      button.addEventListener("click", () => {
-        document
-          .querySelector(".overlay-wrapper")
-          .classList.add("overlay-hidden");
-      });
-    });
-  });
+		const closeOverlay = document.querySelectorAll("[data-overlay-close]");
+		closeOverlay.forEach((button) => {
+			button.addEventListener("click", () => {
+				document
+					.querySelector(".overlay-wrapper")
+					.classList.add("overlay-hidden");
+			});
+		});
+	});
 </script>
 
 <style>
-  .headline-wrapper {
-    @apply mb-2 md:mb-6 lg:mb-12;
+	.headline-wrapper {
+		@apply mb-2 md:mb-6 lg:mb-12;
 
-    @screen md {
-      min-height: clamp(6.25rem, 17vw, 43.75rem);
-    }
-  }
-  .list-toggle-mobile {
-    margin-bottom: 2rem;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 1.25rem;
+		@screen md {
+			min-height: clamp(6.25rem, 17vw, 43.75rem);
+		}
+	}
+	.list-toggle-mobile {
+		margin-bottom: 2rem;
+		width: 100%;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		column-gap: 1.25rem;
 
-    @screen md {
-      display: none;
-    }
+		@screen md {
+			display: none;
+		}
 
-    .buttons {
-      height: 100%;
-      display: flex;
-      justify-content: space-between;
-      aspect-ratio: 163/122;
+		.buttons {
+			height: 100%;
+			display: flex;
+			justify-content: space-between;
+			aspect-ratio: 163/122;
 
-      @media (min-width: 391px) {
-        aspect-ratio: auto;
-      }
+			@media (min-width: 391px) {
+				aspect-ratio: auto;
+			}
 
-      @media (min-width: 404px) {
-        justify-content: flex-start;
-        column-gap: 1.25rem;
-      }
-    }
+			@media (min-width: 404px) {
+				justify-content: flex-start;
+				column-gap: 1.25rem;
+			}
+		}
 
-    img {
-      height: 100%;
-    }
-  }
-  .project-list {
-    margin-top: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.75rem;
+		img {
+			height: 100%;
+		}
+	}
+	.project-list {
+		margin-top: 1.25rem;
+		display: flex;
+		flex-direction: column;
+		row-gap: 0.75rem;
 
-    @screen md {
-      margin-top: 0;
-    }
-  }
+		@screen md {
+			margin-top: 0;
+		}
+	}
 
-  .placeholder {
-    display: none;
-  }
+	.placeholder {
+		display: none;
+	}
 
-  .list-toggle-desktop {
-    display: none;
+	.list-toggle-desktop {
+		display: none;
 
-    @screen md {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: var(--gap);
-      position: absolute;
-      width: 100%;
-      pointer-events: none;
-    }
+		@screen md {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: var(--gap);
+			position: absolute;
+			width: 100%;
+			pointer-events: none;
+		}
 
-    button,
-    img {
-      width: 100%;
-    }
-  }
+		button,
+		img {
+			width: 100%;
+		}
+	}
 
-  .list-toggle-desktop-buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    grid-column-start: 4;
-    aspect-ratio: 422/324;
-    width: 100%;
-    height: 100%;
-    pointer-events: all;
-  }
-  .grid .list-toggle-desktop {
-    display: none;
+	.list-toggle-desktop-buttons {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
+		grid-column-start: 4;
+		aspect-ratio: 422/324;
+		width: 100%;
+		height: 100%;
+		pointer-events: all;
+	}
+	.grid .list-toggle-desktop {
+		display: none;
 
-    @screen md {
-      display: block;
-      position: relative;
-    }
-  }
+		@screen md {
+			display: block;
+			position: relative;
+		}
+	}
 
-  .grid .placeholder {
-    display: none;
+	.grid .placeholder {
+		display: none;
 
-    @screen md {
-      display: block;
-      visibility: hidden;
-      aspect-ratio: 422/324;
-      width: 100%;
-      height: 100%;
-    }
-  }
+		@screen md {
+			display: block;
+			visibility: hidden;
+			aspect-ratio: 422/324;
+			width: 100%;
+			height: 100%;
+		}
+	}
 
-  .project-list-placeholder {
-    display: none;
+	.project-list-placeholder {
+		display: none;
 
-    @screen md {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: var(--gap);
-      pointer-events: none;
-      margin-bottom: var(--gap);
-    }
+		@screen md {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: var(--gap);
+			pointer-events: none;
+			margin-bottom: var(--gap);
+		}
 
-    div {
-      display: block;
-      visibility: hidden;
-      aspect-ratio: 422/324;
-      width: 100%;
-      height: 100%;
-    }
-  }
+		div {
+			display: block;
+			visibility: hidden;
+			aspect-ratio: 422/324;
+			width: 100%;
+			height: 100%;
+		}
+	}
 
-  .project-list .title {
-    display: flex;
-    column-gap: 0.5rem;
-    align-items: center;
+	.project-list .title {
+		display: flex;
+		column-gap: 0.5rem;
+		align-items: center;
 
-    @screen md {
-      column-gap: 1.5rem;
-      max-width: calc(100% - 23%);
-    }
+		@screen md {
+			column-gap: 1.5rem;
+			max-width: calc(100% - 23%);
+		}
 
-    .customer {
-      font-family: theme(fontFamily.nationalCompressedExtrabold);
-      white-space: nowrap;
-      font-size: 1.875rem;
-      line-height: 2.125rem;
-      text-transform: uppercase;
+		.customer {
+			font-family: theme(fontFamily.nationalCompressedExtrabold);
+			white-space: nowrap;
+			font-size: 1.875rem;
+			line-height: 2.125rem;
+			text-transform: uppercase;
 
-      @screen md {
-        column-gap: 1.5rem;
-        font-size: 50px;
-        line-height: 60px;
-      }
+			@screen md {
+				column-gap: 1.5rem;
+				font-size: 50px;
+				line-height: 60px;
+			}
 
-      @screen lg {
-        font-size: 5.625rem;
-        line-height: 6.375rem;
-      }
-    }
+			@screen lg {
+				font-size: 5.625rem;
+				line-height: 6.375rem;
+			}
+		}
 
-    .name {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-family: theme(fontFamily.ppeditorialnew);
-      font-size: 1.5625rem;
-      line-height: 28px;
-      padding-top: 7px;
+		.name {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			font-family: theme(fontFamily.ppeditorialnew);
+			font-size: 1.5625rem;
+			line-height: 28px;
+			padding-top: 7px;
 
-      @screen md {
-        font-size: 41px;
-        line-height: 48px;
-        padding-top: 13px;
-      }
+			@screen md {
+				font-size: 41px;
+				line-height: 48px;
+				padding-top: 13px;
+			}
 
-      @screen lg {
-        font-size: 4.75rem;
-        line-height: 5.1875rem;
-        padding-top: 20px;
-      }
-    }
-  }
+			@screen lg {
+				font-size: 4.75rem;
+				line-height: 5.1875rem;
+				padding-top: 20px;
+			}
+		}
+	}
 
-  .project-list .image {
-    display: none;
-    position: relative;
-  }
+	.project-list .image {
+		display: none;
+		position: relative;
+	}
 
-  .grid {
-    display: flex;
-    flex-direction: column;
-    row-gap: 1.75rem;
+	.grid {
+		display: flex;
+		flex-direction: column;
+		row-gap: 1.75rem;
 
-    @screen md {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: var(--gap);
-    }
-  }
+		@screen md {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: var(--gap);
+		}
+	}
 
-  .grid .image {
-    display: block;
+	.grid .image {
+		display: block;
 
-    @screen md {
-      aspect-ratio: 422 / 324;
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .grid .title {
-    display: none;
-  }
+		@screen md {
+			aspect-ratio: 422 / 324;
+			width: 100%;
+			height: 100%;
+		}
+	}
+	.grid .title {
+		display: none;
+	}
 
-  .add-project-wrapper {
-    margin-top: 0.75rem;
+	.add-project-wrapper {
+		margin-top: 0.75rem;
 
-    @screen md {
-      margin-top: 1.5rem;
-    }
-  }
+		@screen md {
+			margin-top: 1.5rem;
+		}
+	}
 
-  .project-list.grid .add-project-wrapper {
-    margin-top: 0;
-  }
+	.project-list.grid .add-project-wrapper {
+		margin-top: 0;
+	}
 
-  .add-project {
-    display: inline-flex;
-    column-gap: 0.25rem;
-    background-color: var(--color-white-transparent);
-    padding: 0.25rem 1rem 0.175rem 1rem;
-    border: 2px solid var(--color-black);
-    cursor: pointer;
-    align-items: center;
+	.add-project {
+		display: inline-flex;
+		column-gap: 0.25rem;
+		background-color: var(--color-white-transparent);
+		padding: 0.25rem 1rem 0.175rem 1rem;
+		border: 2px solid var(--color-black);
+		cursor: pointer;
+		align-items: center;
 
-    @screen md {
-      column-gap: 1rem;
-    }
+		@screen md {
+			column-gap: 1rem;
+		}
 
-    @screen lg {
-      padding: 0.625rem 1.375rem;
-    }
+		@screen lg {
+			padding: 0.625rem 1.375rem;
+		}
 
-    @media screen and (min-width: 1050px) {
-      border-width: 3px;
-    }
+		@media screen and (min-width: 1050px) {
+			border-width: 3px;
+		}
 
-    @media screen and (min-width: 1400px) {
-      border-width: 4px;
-    }
+		@media screen and (min-width: 1400px) {
+			border-width: 4px;
+		}
 
-    @media screen and (min-width: 1900px) {
-      border-width: 5px;
-    }
+		@media screen and (min-width: 1900px) {
+			border-width: 5px;
+		}
 
-    @media screen and (min-width: 2000px) {
-      border-width: 6px;
-    }
+		@media screen and (min-width: 2000px) {
+			border-width: 6px;
+		}
 
-    div,
-    span {
-      display: inline;
-    }
+		div,
+		span {
+			display: inline;
+		}
 
-    div {
-      @screen md {
-        padding-bottom: 0.25rem;
-      }
+		div {
+			@screen md {
+				padding-bottom: 0.25rem;
+			}
 
-      @screen lg {
-        padding-bottom: 0;
-      }
-    }
-  }
+			@screen lg {
+				padding-bottom: 0;
+			}
+		}
+	}
 
-  .grid .add-project {
-    @screen md {
-      display: flex;
-      height: 100%;
-      aspect-ratio: 422/324;
-    }
-  }
+	.grid .add-project {
+		@screen md {
+			display: flex;
+			height: 100%;
+			aspect-ratio: 422/324;
+		}
+	}
 </style>
